@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='/jquery/jquery-3.6.0.min.js'></script>
+<script>
+
+$(() => {
+
+/* $('#button1').on('click', ()=> {
+alert('Button1 clicked');
+}); */
+
+/* $('#text1').on('change', () => {
+alert('Text1 content changed');
+}); 
+The function associated with the change event will execute the element lost focus and the value of the element is changed.
+*/
+
+/* $('#text1').on('input' ,(ev) => {
+alert('Text1 content changed to ' + ev.target.value);
+});
+The input event will fire whenever the value of the element changes.
+*/
+
+/*
+$('#text1').on('focus', () => {
+$('#noticeBoard1').html('Text1 got focus');
+});
+
+The focus event will fire, when the element with which this event is binded gets focus.
+
+$('#text1').on('blur', () => {
+$('#noticeBoard1').html('Text1 lost focus');
+});
+
+The blur event will fire, when the element with which this event is binded lose focus.
+
+$('#text2').on('focus', () => {
+$('#noticeBoard2').html('Text2 got focus');
+});
+
+$('#text2').on('blur', () => {
+$('#noticeBoard2').html('Text2 lost focus');
+});
+*/
+
+/*
+// Combo box using JavaScript
+$('#city').on('change', (ev) => {
+alert('City changed');
+alert('Value of city -> ' + ev.target.value);
+alert('Index of city -> ' + ev.target.selectedIndex);
+alert('Selected city -> ' + ev.target.options[ev.target.selectedIndex]);
+alert('Selected city -> ' + ev.target.options[ev.target.selectedIndex].text);
+Here we are using JavaScript and DOM elements to access the selected city information
+});
+*/
+
+// Combo Box using JQuery
+/*
+$('#city').on('change', () => {
+alert($(this).html());
+});
+The this in case of arrow function won't work, as the object for which the arrow function is invoked, the reference of that object is not set against the this pointer.
+*/
+
+// SOLUTION- Using anonymous function
+/*
+$('#city').on('change', function() {
+alert($(this).html());
+// But in case of anonymous function, the object for which the arrow function in invoked, the reference of that object is set against the this pointer.
+alert($(this).find(':selected').val());
+alert($(this).find(":selected").text());
+// The :selected will find the tag with the attribute selected.
+});
+*/
+
+// SOLUTION- Using arrow functon
+$('#city').on('change', (ev) => {
+alert($(ev.target).html());
+alert($(ev.target).find(':selected').val());
+alert($(ev.target).find(':selected').text());
+});
+
+});
+
+</script>
+</head>
+<body>
+<h1>Example 13: Adding Event Listeners using ON</h1>
+<button type='button' id='button1'>Click Me</button> <br>
+Text 1 <input type='text' id='text1' /> <br>
+Text 2 <input type='text' id='text2' /> <br>
+Select city:
+<select id='city'>
+<option value=1>Indore</option>
+<option value=2>Mumbai</option>
+<option value=3>Pune</option>
+<option value=4>Banglore</option>
+<option value=5>Chennai</option>
+</select> <br> <br>
+<div id='noticeBoard1'></div>
+<div id='noticeBoard2'></div>
+<br><a href='/'>Home</a>
+</body>
+</html>

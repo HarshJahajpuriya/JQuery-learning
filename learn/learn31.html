@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='/jquery/jquery-3.6.0.min.js'> </script>
+<style>
+.xyz {
+color: red;
+}
+.pqr {
+color: lime;
+font-size: 14pt;
+}
+</style>
+<script>
+const oneClicked = (ev) => {
+alert($('.xyz').css("color"));
+$('.xyz').css('color', 'blue');
+}
+function twoClicked(ev) {
+alert($('.pqr').css('fontSize'));	// Use camel case instead of prop value separated -
+var fontSize = parseFloat($('.pqr').css('fontSize'));
+alert(fontSize);
+var newFontSize = `${fontSize*2}px`;
+$('.pqr').css('fontSize', newFontSize);
+alert(newFontSize);
+}
+</script>
+</head>
+<body>
+<h1 class='xyz'>Example 31: Accessing property of css class</h1>
+<div class='pqr'>Devil is in me </div><br><br>
+<button onClick='oneClicked(this)'>Button 1</button><br><br>
+<button onClick='twoClicked(this)'>Button 2</button><br><br>
+<br>
+<a href='/'> Home </a>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.css">
+  <script src='jquery/jquery-3.6.0.min.js'> </script>
+  <script src="jquery-ui-1.13.0/jquery-ui.js"></script>
+  <script>
+    $(() => {
+      $("#thinkingMachines").hide();
+    })
+    const doSomething = () => {
+      $("#thinkingMachines").dialog({
+        "title": "Modal Title",
+        "buttons": [
+          {
+            "text": "Ok",
+            "icon": "ui-icon-check",
+            "click": function() {
+              $(this).dialog("close")
+            }
+          },
+          {
+            "text": "Cancel",
+            "icon": "ui-icon-close",
+            "click": function() {
+              alert("Closing Dialog");
+              $(this).dialog("close");
+            }
+          }
+        ]
+      })
+    }
+  </script>
+</head>
+
+<body>
+  <h1>Example 61 - Dialog</h1>
+  <br>
+  <br>
+  <div id="thinkingMachines"> 
+    <h1>Thinking Machines</h1>
+    <h3>Think Big!!!</h3>
+    <h5>Learn more than you can</h5>
+  </div>
+  <br>
+  <br>
+  <br>
+  <button type="button" onclick="doSomething()">Click Me</button>
+  <br>
+  <br>
+  <a href='/'> Home </a>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='/jquery/jquery-3.6.0.min.js'> </script>
+<script>
+$(() => {
+$('#b1').click(() => {
+var cb = $('.cb');
+// cb.attr('checked', true); // this will always set checked attribute to true
+// cb.attr('checked', !cb.attr('checked')); // this will flip the current value of the checked attribute
+// cb.prop('checked', !cb.prop('checked')); // alternative
+cb.prop('checked', !cb.is(':checked')); // a bit slower than the above two methods
+});
+});
+</script>
+</head>
+<body>
+<h1> Example 22: attr, prop, is jQuery functions</h1>
+<input class='cb' type='checkbox' />
+<br>
+<button id='b1' type='button'>Click Me</button>
+<br>
+<a href='/'> Home </a>
+</body>
+</html>

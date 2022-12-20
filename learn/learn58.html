@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script>
+  function doSomething() {
+    try {
+      var num = 80;  
+      if(num < 50) {
+        throw Error("Number cannot be less than 50")
+      }
+      if(num %2 == 1) {
+        throw Error("Cannot Process Odd Number")
+      }
+      alert("Great")
+    } catch(e) {
+      alert(e.message);
+    } finally {
+      alert("Done")
+    }
+  }
+  function doingSomething() {
+    // var while = 10;
+    // alert(while)
+
+    // Properties of objects in JavaScript are stored in key-value pairs, and keys are String which are mapped to some value.
+    var obj = {
+      while: 20
+    }
+    alert(obj.while)
+  }
+</script>
+</head>
+<body>
+  <h1>Example 58: try-catch-finally</h1>
+  <br>
+  <button type="button" onclick="doSomething()">Button 1</button> <br><br>
+  <button type="button" onclick="doingSomething()">Button 2</button>
+<br>
+<a href='/'> Home </a>
+</body>
+</html>

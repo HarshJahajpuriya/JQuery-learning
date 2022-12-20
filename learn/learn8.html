@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='/jquery/jquery-3.6.0.min.js'> </script>
+<script>
+function doSomething() {
+alert($('[organisationType]').html());
+alert($('[organisationType=institute]').html());
+alert($('p[organisationType=institute').html());
+alert($('div[place!=city]').html())
+alert($('div[place!=city]:last').html())
+$('[organisationType]').hide();
+}
+</script>
+</head>
+<body>
+<h1>Example 8: JQuery Selectors-V (Attribute Selectors)</h1>
+<div organisationType='school'>Doon School</div>
+<p organisationType='institute'>Thinking Mahines</p>
+<div slogan='first'>We teach more than we promise to teach</div>
+<span slogan='second'>Think Big!!!</span>
+<div place='city'>Ujjain</div>
+<div place='state'>MP</div>
+<button onClick='doSomething()'>Click Me</button>
+<br><a href='/'>Home</a>
+</body>
+</html>

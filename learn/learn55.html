@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.css">
+  <script src='jquery/jquery-3.6.0.min.js'> </script>
+  <script src="jquery-ui-1.13.0/jquery-ui.js"></script>
+  <script>
+    $(() => {
+      $('#email').tooltip({
+        show: {effect: "blind", duration:100}
+      });
+      $('#country').tooltip({
+        show: {effect: "drop", direction:"down"}
+        // directions: down, left, right
+      });
+      $('#age').spinner({
+        min: 18,
+        max: 45,
+        step: 2
+      });
+    });
+  </script>
+</head>
+<body>
+  <h1>Example 55 - tooltip & spinner</h1>
+  <label>E-mail : </label>
+  <input type="text" name="email" id="email" title="Entered E-mail will act as username">
+  <label>Select country</label>
+  <select id='country' title="Language will be decided based on the selected country">
+    <option value="-1">&lt;Select country&gt;</option>
+    <option value="India">India</option>
+    <option value="America">America</option>
+    <option value="Canada">Canada</option>
+  </select>
+  <label for="age">Age</label>
+  <input type="number" name="age" id="age" value="18">
+  <br><br>
+  <a href='/'> Home </a>
+</body>
+
+</html>

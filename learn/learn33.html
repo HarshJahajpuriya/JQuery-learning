@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='/jquery/jquery-3.6.0.min.js'> </script>
+<style>
+.xyz {
+height: 40px;
+overflow: hidden;
+}
+</style>
+<script>
+$(() => {
+
+var initialHeight = $('.xyz').css('height');
+$('.xyz').css('height', 'auto');
+var autoHeight = $('.xyz').css('height');
+$('.xyz').css('height', initialHeight);
+
+$('#abcd').click((ev) => {
+
+ev.preventDefault();
+
+/*
+SYNTAX for animate 
+
+$('Selector').animate(
+{key: value}, properties on which animation should be applied
+duration,
+effect,
+() => {} CallBack Function will execute after the animation ends
+);
+*/
+
+// This will adjust height of the element with an animation effect
+if($('.xyz').css('height') == initialHeight) {
+$('.xyz').animate(
+{'height': autoHeight}, 
+1000, 
+'linear', 
+() => {
+$(ev.target).html('Show less');
+}
+);	
+// In 'linear' the speed of whole animation will be same throughout the time interval.
+} else {
+$('.xyz').animate({'height': initialHeight}, 1000, 'swing', () => {
+$(ev.target).html('Show more');
+});
+// In 'swing' the speed of animation will increase with time.
+}
+
+
+});
+
+});
+</script>
+</head>
+<body>
+<h1>Example 33: animate</h1>
+<div class='xyz'>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+</div>
+<a id='abcd' href=''>Show more</a><br>
+<br>
+<a href='/'> Home </a>
+</body>
+</html>

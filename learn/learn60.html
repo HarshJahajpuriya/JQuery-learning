@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.css">
+  <script src='jquery/jquery-3.6.0.min.js'> </script>
+  <script src="jquery-ui-1.13.0/jquery-ui.js"></script>
+  <script>
+
+    // class Department {
+    //   constructor(id, name) {
+    //     this.id = id;
+    //     this.name = name;
+    //     this.employeee = [];
+    //   }
+    // }
+
+    var departmentMap = new Map();
+    var selectedDepartmentId = -1;
+    const loaderStr = "<img src='/images/loader.gif' style='text-align: centre; margin-left: calc(50% - 100px)'></img>";
+
+    $(() => {
+      console.log("Here")
+      document.getElementById("departments").innerHTML = loaderStr;
+      $.ajax({
+        "url": 'getDepartments',
+        "type": 'GET',
+        "success": renderDepartments
+      });
+    });
+
+    function fetchNext(ev, ui) {
+      var departmentId = ui.newHeader[0]?.attributes[0]?.value;
+      if(departmentId) {
+        selectedDepartmentId = +departmentId;
+        //console.log(departmentMap)
+        //console.log(selectedDepartmentId)
+        //console.log(departmentMap.get(selectedDepartmentId).employees.length === 0)
+        if(departmentMap.get(selectedDepartmentId).employees === undefined) {
+          getEmployees(departmentId).then(
+            (employees) => {
+              renderEmployees(employees)
+            },
+            () => {
+              departmentMap.get(selectedDepartmentId).employees = [];
+              document.getElementById(`contentForDepartment${selectedDepartmentId}`).innerHTML = "";
+              $("<h3>No Employees</h3>").appendTo(`#contentForDepartment${selectedDepartmentId}`);
+            }
+          )
+        }
+      }
+    }
+
+    function renderDepartments(departments) {
+      //console.log(departments)
+      document.getElementById("departments").innerHTML = "";
+      let departmentId = departments[0].id;
+      var headings = '';
+      for(let department of departments) {
+        var heading = $(`<h3 departmentNumber=${department.id} id='departmentId${department.id}'>${department.name}</h3>`);
+        heading.appendTo(`#departments`)
+
+        var name = $(`<div id='contentForDepartment${department.id}'></div>`)
+        name.appendTo(`#departments`);
+
+        departmentMap.set(department.id, {
+          "name": department.name
+        })
+      }
+      //console.log(departmentMap)
+      selectedDepartmentId = departmentId;
+      //console.log(departmentId)
+      getEmployees(departmentId).then(
+        (employees) => {
+          renderEmployees(employees)
+        }, 
+        () => {
+          departmentMap.get(selectedDepartmentId).employees = [];
+          console.log("No Employees")
+        }
+      )
+      $('#departments').accordion({
+        active: 0,
+        collapsible: true,
+        activate: fetchNext,
+        heightStyle: 'content'
+      });
+    }
+
+    function getEmployees(departmentId) {
+      var promise = new Promise((resolve, reject) => {
+        document.getElementById(`contentForDepartment${selectedDepartmentId}`).innerHTML = loaderStr;
+        fetch("getDepartmentEmployees?departmentId="+departmentId)
+        .then((response) => {
+          return response.json()
+        }).then((employees) => {
+          resolve(employees);
+        }).catch(e => {
+          reject();
+        })
+      })
+      return promise;
+    }
+
+    function renderEmployees(employees) {
+      console.log(employees)
+      document.getElementById(`contentForDepartment${selectedDepartmentId}`).innerHTML = "";
+      departmentMap.get(selectedDepartmentId).employees = employees
+      //console.log(employees)
+      for(let employee of employees) {
+        var name = $(`<div id='${selectedDepartmentId}employee${selectedDepartmentId}'>${employee.name}</div>`)
+        name.appendTo(`#contentForDepartment${selectedDepartmentId}`);
+        // document.getElementById(`contentForDepartment${selectedDepartmentId}`).innerHTML += "<img src='/images/loader.gif' style='text-align: centre;'></img>";
+      }
+      
+    }
+
+  </script>
+</head>
+
+<body>
+
+  <h1>Example 60 - Assignment</h1>
+  <div id="departments">
+  </div>
+  <br><br>
+  <a href='/'> Home </a>
+</body>
+
+</html>

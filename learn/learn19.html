@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='jquery/jquery-3.6.0.min.js'> </script>
+<style>
+.xyz {
+color: white;
+background: black;
+}
+</style>
+<script>
+$(() => {
+$('h3[menuitem]').hover(function(){
+// The hover event fires whenever the cursor enters the area of the specified element.
+// And it also fires whenever the cursor leaver the area of the specified element.
+$(this).toggleClass('xyz');
+// This will add the xyz class when the cursor enter the area of the specified element.
+// And will remove the xyz class when the cursor leaves that area.
+});
+$('h3[menuitem]').click((ev) => {
+alert($(ev.target).text() + ' clicked');
+// This will select the clicked element and will extract the text form that element.
+alert($(ev.target).attr("menuitem"));
+// This will extract the value of the specified attribute of the selected element.
+});
+});
+</script>
+</head>
+<body>
+<h1>Example 19: toggleClass on hover, Acessing value of attribute</h1>
+<div>
+<h3 id='Indore' menuitem='0'>Indore</h3>
+<h3 menuitem='1'>Ujjain</h3>
+<h3 menuitem='2'>Mumbai</h3>
+<h3 menuitem='3'>Goa</h3>
+</div>
+<br><br>
+<a href='/'> Home </a>
+</body>
+</html>

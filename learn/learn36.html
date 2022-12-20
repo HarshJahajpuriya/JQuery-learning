@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='/jquery/jquery-3.6.0.min.js'> </script>
+<script>
+$(() => {
+
+$('#ellipses').show();
+$('#moreMatter').hide();
+
+$('#divTogglerButton').click(function() {
+if($(this).html() == 'Show More') {
+$('#ellipses').hide();
+$('#moreMatter').show();
+$(this).html('Show Less');
+} else {
+$('#ellipses').show();
+$('#moreMatter').hide();
+$(this).html('Show More');
+}
+})
+
+})
+</script>
+</head>
+<body>
+<h1>Example 36: Another way to hide and show content (Using span)</h1>
+<div>
+A recruiter found my profile on linkedin and informed me about an opening in Amazon for SDE 2 position. Just to provide a brief background on my profile, I am a graduate in computer science from IIT Bombay (India) and I had 4 years of experience in software development when I was given this opportunity.<span id='ellipses'>....</span>
+<span id='moreMatter'>Over the course of next 2 months I went through a telephonic screening round on programming, 3 on-site interviews with emphasis on design, one bar raiser round on people skills and software design followed by another round of programming interview. It was an exhaustive process to test me on all my skills and fortunately I was able to clear it.
+As I went through the rounds it was apparent that work experience was not important. The stress was on the approach to solve questions and eventually come up with a working solution. There were several instances where only the approach was required and several others where implementation was required too. I had prepared for the same and would like to share the methods of preparation.
+Before getting into the actual methods I would like to set the context with an analogy to fitness.
+It is similar to saying you would want to get 6 pack abs. Can anyone get it? Yes, absolutely! Are there instructions on how to get it? Yes, again! The internet is filled with tips to get 6 pack abs. What’s the catch in this whole situation. The catch is that only a small subset of us work hard enough to really achieve it. It takes a hell lot of time, energy and will to accomplish something like that. You need to be fully invested in your quest and without that it would remain elusive.
+Now to get 6 pack abs, all you need to do is follow a few simple steps
+Buy membership of a gym and actually workout everyday
+Get a personal trainer and listen to his advise
+Start eating healthy and actually follow the diet plan
+Give it a year and voila you have got what you wanted !
+Sounds pretty simple right, but as you might know, not many can go to the gym regularly and that’s just the first step of the plan. Surprisingly learning software development is quite easy. You don’t need to buy a membership or leave the comfort of your house to be at the gym or listen to some guy telling you to give him another 5. All it takes is a laptop, a working internet connection, will to solve problems regularly and within a year you would learn the essentials.
+Over the first 3 years of my job I did not practice coding and got a bit rusty. I even failed a couple of interviews which gave me the kick to polish my skills. I started with solving the basic problems on Leetcode and Hackerrank. I did not do it rigorously but I did it regularly. I tried to solve one problem everyday. It was either a new problem or something that I had solved earlier. Over the course of 8 months I solved 100+ problems multiple times. Eventually I was able to read the question and come up with perfect solution along with code in the first attempt.
+</span>
+<br/>
+</div>
+</br>
+<button id='divTogglerButton'>Show More</button>
+</br>
+<br>
+<a href='/'> Home </a>
+</body>
+</html>

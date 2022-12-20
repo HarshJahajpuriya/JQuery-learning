@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='/jquery/jquery-3.6.0.min.js'></script>
+<script>
+function doSomething() {
+alert($('h1:first').html());
+alert($('h1:last').html());
+alert($('h1:eq(0)').html());
+alert($('h1:eq(1)').html());
+alert($('h1:eq(2)').html());
+}
+</script>
+</head>
+<body>
+<h1>Example 7: JQuery Selectors-IV (First and last)</h1>
+<h1>Thinking Machines</h1>
+<div>We teach more than we promise to teach</div>
+<h1>Think Big!!!</h1>
+<button type='button' onClick='doSomething()'>Click Me</button>
+<br><a href='/'>Home</a>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='/jquery/jquery-3.6.0.min.js'> </script>
+<script>
+$(() => {
+$(document).keypress((ev) => {
+if(ev.target.id == 't1') 
+{
+if(!((ev.charCode>=65 && ev.charCode<=90) || (ev.which>=97 && ev.which<=122) || ev.which==32)) 
+{
+ev.preventDefault();
+}
+return;
+}
+
+if(ev.target.id == 't2') 
+{
+if(!(ev.which>=48 && ev.charCode<=57)) 
+{
+ev.preventDefault();
+}
+return;
+}
+
+});
+});
+</script>
+</head>
+<body>
+<h1>Example 27: input</h1>
+Enter your name : <input type='text' id='t1'><br><br>
+Enter your age : <input type='text' id='t2'><br><br>
+<br>
+<a href='/'> Home </a>
+</body>
+</html>

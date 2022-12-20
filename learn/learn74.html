@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.css">
+  <script src='jquery/jquery-3.6.0.min.js'> </script>
+  <script src="jquery-ui-1.13.0/jquery-ui.js"></script>
+  <script>
+    $(() => {
+      $("#cities").selectable({
+        selected: function(ev, ui) {
+          $(ui.selected).siblings().removeClass('ui-selected');
+        },
+        stop: function(ev) {
+          $("#noticeBoard>ul>li").remove()
+          var selectedItems = $(".ui-selected")
+          selectedItems.each((k,e) => {
+            $("#noticeBoard>ul").append(`<li>${e.id} - ${e.innerHTML}</li>`)
+          })
+        }
+      });
+    })
+  </script>
+  <style>
+    .ui-selected {
+      background-color: gray;
+      color: white;
+    }
+    ul {
+      border: 1px solid gray;
+      width: 140px;
+      padding: 8px;
+    }
+    li {
+      padding: 4px;
+      margin: 0;;
+      list-style: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Example 74 - Single Selectable & Show in a division</h1>
+  <br>
+  <ul id="cities">
+    <li id="1">Indore</li>
+    <li id="2">Ujjain</li>
+    <li id="3">Dewas</li>
+    <li id="4">Mhow</li>
+  </ul>
+  <br>
+  <div id="noticeBoard">
+    <h3>Selected Cities</h3>
+    <ul>
+  
+    </ul>
+  </div>
+  <a href='/'> Home </a>
+</body>
+
+</html>

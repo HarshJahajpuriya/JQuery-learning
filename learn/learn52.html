@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.css" >
+  <script src='jquery/jquery-3.6.0.min.js'> </script>
+  <script src="jquery-ui-1.13.0/jquery-ui.js"></script>
+  <script>
+    $(() => {
+
+      $('#b1').button();
+      $('#homeButton').button();
+
+      $('#ujjain').button()
+      $('#indore').button()
+      $('#dewas').button()
+
+      // $('#natonality').buttonSet()
+
+      $('#indian').button();
+      $('#american').button();
+      $('#australian').button();
+
+    });
+  </script>
+</head>
+
+<body>
+  <h1>Example 52 - jQuery button()</h1>
+  <br>
+  <button id='b1' type="button">Button 1</button><Br><br>
+
+  <label for="ujjain">Ujjain</label>
+  <input type="checkbox" id="ujjain"><br><br>
+  <label for="indore">Indore</label>
+  <input type="checkbox" id="indore"><br><br>
+  <label for="dewas">Dewas</label>
+  <input type="checkbox" id="dewas"><br><br><br><Br>
+
+  <div id="nationality">
+    <label for="indian">Indian</label>
+    <input type="radio" name="nationality" id="indian"><br><br>
+    <label for="american">American</label>
+    <input type="radio" name="nationality" id="american"><br><br>
+    <label for="australian">Australian</label>
+    <input type="radio" name="nationality" id="australian"><br><br><br><br>
+  </div>
+
+
+  <a id='homeButton' href='/'> Home </a>
+</body>
+
+</html>

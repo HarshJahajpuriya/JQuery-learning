@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='/jquery/jquery-3.6.0.min.js'> </script>
+<script>
+
+function doSomething() {
+var p = new Promise(function(abcd){
+setTimeout(function(){
+abcd('I am Great');
+}, 10000)
+})
+return p;
+}
+
+function oneClicked() {
+var promise = doSomething();
+promise.then(function(message) {
+console.log(message);
+})
+console.log('I can do anything');
+}
+
+async function twoClicked() {
+await doSomething().then(function(message) {
+console.log(message);
+})
+console.log('I can do anything');
+}
+
+function timePass(ms) {
+return new Promise(function(resolve) {
+setTimeout(resolve, ms);
+})
+}
+
+async function threeClicked() {
+console.log('I');
+await timePass(1000);
+console.log('am');
+await timePass(10000);
+console.log('here');
+}
+
+</script>
+</head>
+<body>
+<h1>Example 45 - Promise, async, await</h1>
+<br/>
+<button type='button' onClick='oneClicked()'>Button one</button>
+<br>
+<br>
+<button type='button' onClick='twoClicked()'>Button two</button>
+<br>
+<br>
+<button type='button' onClick='threeClicked()'>Button three</button>
+<br>
+<br>
+<a href='/'> Home </a>
+</body>
+</html>

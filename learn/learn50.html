@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <link rel='stylesheet' href='jquery-ui-1.13.0/jquery-ui.css'>
+  <script src='jquery/jquery-3.6.0.min.js'> </script>
+  <script src='jquery-ui-1.13.0/jquery-ui.js'> </script>
+  <script>
+    $(() => {
+      $('#date1').datepicker();
+
+      $('#date2').datepicker({
+        altField: '#d2',
+        altFormat: 'DD - dd/mm/yy'
+      });
+      /* 
+      Format Specified
+      d: single digit date in case of 1 to 9
+      dd: double digit date
+      m: single digit month in case of 1 to 9
+      mm: double digit month
+      y: double digit year
+      yy: four digit year
+      D: Short form of day name
+      DD: full day name
+      M: short form of month name
+      MM: full month name
+      */
+
+      $('#date3').datepicker({
+        altField: '#d3',
+        altFormat: 'D:M,yy -> d/m/y',
+        defaultDate: '26/12/1999',
+        dateFormat: 'dd/mm/yy'
+      });
+
+    });
+  </script>
+</head>
+
+<body>
+  <h1>Example 50 - datepicker</h1>
+  <div id='date1'></div><br><br>
+  <div id='date2'></div><br>
+  <input type="text" id='d2'/>
+  <br>
+  <div id='date3'></div><br>
+  <input type="text" id='d3'/>
+  <br>
+  <a href='/'> Home </a>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DCOTYPE html>
+<html lang = 'en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='/jquery/jquery-3.6.0.min.js'></script>
+<script>
+$(() => {
+$(document).keydown((ev) => {
+// In case of keydown event, our event listener will execute first and 
+// then the predefined functionality for web browser will execute.
+
+//alert('key property of event object : ' + ev.key);
+//if(ev.key=='F1' || ev.key=='F3' || ev.key=='F5' || ev.key=='CapsLock') 
+//ev.preventDefault();
+// ev.preventDefault will prevent the predefined functionality to get execute.
+// The functonalities on keydown event which are associated with browser, will get 
+// blocked.
+// CapsLock will not be blocked, as that functionality is not associated with the browser.
+
+//alert("kwyCode property of event object : " + ev.keyCode);
+// The keyCode prperty holds an unique number for each key
+
+//alert("charCode property of event object : " + ev.charCode);
+// In case of keydown event charCode holds the value 0 for each key.
+
+alert("which property of event object : " + ev.which);
+// The which property holds an unique number for each key, same as keyCode property
+
+});
+}); 
+</script>
+</head>
+<h1>Example 25: keydown</h1>
+<body>
+<br>
+<a href='/'>Home</a>
+</body>
+</html> 

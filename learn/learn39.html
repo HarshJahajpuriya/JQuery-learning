@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>AJAX-1 (Without JQuery)</title>
+<style>
+table {
+border: 1px solid black;
+border-collapse: collapse;
+}
+table th, td {
+border: 1px solid black;
+padding: 4px 8px;
+}
+</style>
+<script>
+// In this example, we are not using JQUERY 
+window.addEventListener('load', () => {
+
+var xhr = new XMLHttpRequest();
+
+xhr.onreadystatechange = function () {
+// Whenever readyState of xhr object changes this function will execute
+// Values of readyState are 0, 1, 2, 3, 4.
+// 0 - Nothing happended.
+// 1 - Connection open.
+// 2 - Header recieved.
+// 3 - Response loaded.
+// 4 - All done.
+
+if(xhr.readyState == 4 && xhr.status == 200) {
+
+var table = document.getElementById('employeesViewTable');
+var tbody = table.getElementsByTagName("tbody")[0];
+var row, cell;
+var employees = [];
+employees = JSON.parse(xhr.responseText);
+for(var i=0; i<employees.length; i++) {
+row = document.createElement("tr");
+cell = document.createElement("td");
+cell.append(document.createTextNode(i+1));
+row.append(cell);
+cell = document.createElement("td");
+cell.append(document.createTextNode(employees[i].id));
+row.append(cell);
+cell = document.createElement("td");
+cell.append(document.createTextNode(employees[i].firstName));
+row.append(cell);
+cell = document.createElement("td");
+cell.append(document.createTextNode(employees[i].lastName));
+row.append(cell);
+tbody.append(row);
+}
+}
+
+}
+xhr.open('GET', 'getEmployees', true);
+// The 3rd argument represents, whether we want to send this request asynchronously or not
+xhr.send();
+})
+
+</script>
+</head>
+<body>
+<h1>Example 39 (AJAX-1) - Without using JQUERY (XMLHttpRequest)</h1>
+<h2>Employees</h2>
+<table id='employeesViewTable'>
+<thead>
+<tr>
+<th>S.No.</th>
+<th>Id.</th>
+<th>First name</th>
+<th>Last name</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<br>
+<a href='/'> Home </a>
+</body>
+</html>

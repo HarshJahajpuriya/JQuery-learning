@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning JQuery</title>
+<script src="jquery/jquery-3.6.0.min.js"></script>
+<style>
+.xyz {
+color: red;
+}
+.abc {
+visibility: hidden;
+}
+</style>
+<script>
+$(() => {
+$('#feature').click((ev) => {
+$('#something').toggleClass('xyz');
+$('#somethingElse').toggleClass('abc');
+// toggleClass function will add the specified class in the classList of the element if it does not exists.
+// And if it exists then the toggleClass function will remove that specified class from the classList.
+});
+})
+</script>
+</head>
+<body>
+<h1>Example 18: toggleClass</h1>
+<div id='something' >
+<h2>Thinking machines</h2>
+<h3>Think Big!!!</h3>
+</div>
+<div id='somethingElse'>
+<h3>Learning JQuery is FUN :)</h3>
+</div>
+Change View <input type='checkbox' id='feature'>
+<br>
+<br>
+<a href='/'>Home</a>
+</body>
+</html>

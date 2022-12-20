@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <script src='jquery/jquery-3.6.0.min.js'> </script>
+  <link rel='stylesheet' href='jquery-ui-1.13.0/jquery-ui.css' />
+  <script src='jquery-ui-1.13.0/jquery-ui.js'> </script>
+  <script>
+    $(() => {
+
+      // $('#technologies').accordion();
+      // By default the section at the index 0 will be opened.
+      // And at one instant of time one window will always be opened.
+
+      // We can pass a JSON to this accordion() function
+      $('#technologies').accordion({
+        active: 1, // By default the section at the specifed index will be selected.
+        collapsible: true, // Now all the sections can be collapsed at one instant of time.
+        //header: h3, // The specified tags will be considered as the headers of the sections
+        // EVENTS
+        activate: doSomething // We are assigning an address to a function to the activate property.
+        // Whenever the section will be toggled the specfied function will
+        // get executed.
+      });
+
+    });
+
+    function doSomething(ev, ui) {
+      console.log(ui.oldHeader.html())
+      console.log(ui.oldPanel)
+      console.log(ui.newHeader)
+      console.log(ui.newPanel)
+    }
+
+  </script>
+</head>
+
+<body>
+
+  <h1>Example-46 - JQuery-UI (Accordion)</h1>
+
+  <div id='technologies'>
+    <h2>C</h2>
+    <div>
+      If computer Science is your branch and C is not the first programming language that you have learnt, then may GOD
+      help you.
+    </div>
+    <h3>C++</h3>
+    <div>
+      <h3>Here</h3>
+      <div>
+        Somewhere........................
+      </div>
+      For strong Object Oriented Programming Skills <br>
+      The Multithreading, networkingm GUI programming, IoT apps, all can be developed using C++.
+    </div>
+    <h4>Data Structures</h4>
+    <div>
+      Data Structures is the core behind the core of every application.
+      The browser that you are using maintains various types of data structures.
+    </div>
+  </div>
+
+  <br>
+  <a href='/'> Home </a>
+</body>
+
+</html>

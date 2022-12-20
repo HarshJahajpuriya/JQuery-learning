@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='/jquery/jquery-3.6.0.min.js'> </script>
+<script>
+var clock;
+
+function updateTime() {
+var date = new Date();
+var time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+$('#theClock').html(time);
+}
+
+function startClock() {
+updateTime();
+clock = setInterval(updateTime, 1000);
+//console.log(clock)
+// The setInterval() Function will invoke the function whose reference is passed to it
+// every time after the specified time is passed.
+// The setInterval function return an unique ID.
+}
+function stopClock() {
+clearInterval(clock);
+// That unique ID can be passed to clearInterval() function. 
+// To stop the cycle of calling the function whose reference is passed to the setInterval function.
+}
+</script>
+</head>
+<body>
+<h1>Example 44 - Clock (using setInterval) </h1>
+<div id='theClock'></div>
+<br>
+<button type='button' onClick='startClock()'>Start Clock</button>
+<br>
+<br>
+<button type='button' onClick='stopClock()'>Stop Clock</button>
+<br>
+<br>
+<a href='/'> Home </a>
+</body>
+</html>

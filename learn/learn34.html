@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='/jquery/jquery-3.6.0.min.js'> </script>
+<style>
+.xyz {
+height: 40px;
+overflow: hidden;
+}
+</style>
+<script>
+$(() => {
+
+var initialHeight = $('.xyz').css('height');
+$('.xyz').css('height', 'auto');
+var autoHeight = $('.xyz').css('height');
+$('.xyz').css('height', initialHeight);
+
+$('#abcd').click((ev) => {
+
+ev.preventDefault();
+
+if($('#ddd').css('height') == initialHeight) {
+$('#ddd').animate({'height': autoHeight}, 1000, 'linear', () => {
+$(ev.target).html('Show less');
+});	
+} else {
+$('#ddd').animate({'height': initialHeight}, 1000, 'swing', () => {
+$(ev.target).html('Show more');
+});
+}
+
+});
+
+});
+</script>
+</head>
+<body>
+<h1>Example 34: animate (Specificity)</h1>
+<div class='xyz' id='ddd'>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+</div>
+<a id='abcd' href=''>Show more</a><br>
+<br>
+<br>
+<div class='xyz'>
+Great Good Happy<br>
+Best Kind Confident<br>
+Great Good Happy<br>
+Best Kind Confident<br>
+Great Good Happy<br>
+Best Kind Confident<br>
+Great Good Happy<br>
+Best Kind Confident<br>
+Great Good Happy<br>
+Best Kind Confident<br>
+Great Good Happy<br>
+Best Kind Confident<br>
+Great Good Happy<br>
+Best Kind Confident<br>
+Great Good Happy<br>
+Best Kind Confident<br>
+Great Good Happy<br>
+Best Kind Confident<br>
+Great Good Happy<br>
+Best Kind Confident<br>
+Great Good Happy<br>
+Best Kind Confident<br>
+Great Good Happy<br>
+Best Kind Confident<br>
+Great Good Happy<br>
+Best Kind Confident<br>
+Great Good Happy<br>
+Best Kind Confident<br>
+Great Good Happy<br>
+Best Kind Confident<br>
+Great Good Happy<br>
+Best Kind Confident<br>
+
+</div>
+<br>
+<a href='/'> Home </a>
+</body>
+</html>

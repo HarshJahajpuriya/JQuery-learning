@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.css">
+  <script src='jquery/jquery-3.6.0.min.js'> </script>
+  <script src="jquery-ui-1.13.0/jquery-ui.js"></script>
+  <script>
+    $(() => {
+      // $('#per').controlgroup();
+      $('#per').controlgroup({
+        "direction": "vertical"
+      })
+    });
+  </script>
+</head>
+<body>
+  <h1>Example 54 - controlgroup()</h1>
+
+  <fieldset>
+    <div id="per">
+      <input type="text" name="name" id="name" placeholder="Name">
+      <select>
+        <option value="-1">&lt;Select city&gt;</option>
+        <option value="101">Indore</option>
+        <option value="102">Dewas</option>
+        <option value="103">Ujjain</option>
+      </select>
+      <label for="male">Male: </label>
+      <input type="radio" name="gender" id="male">
+      <label for="female">Female: </label>
+      <input type="radio" name="gender" id="female">
+    </div>
+  </fieldset>
+
+  <br>
+  <a href='/'> Home </a>
+</body>
+
+</html>

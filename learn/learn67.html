@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.css">
+  <script src='jquery/jquery-3.6.0.min.js'> </script>
+  <script src="jquery-ui-1.13.0/jquery-ui.js"></script>
+  <script>
+    function onStop(ev, ui) {
+      console.log(ui.values[0]+", "+ui.values[1])
+      alert($("#myScale").slider("values", 0) +", "+$("#myScale").slider("values", 1))
+    }
+    $(() => {
+      $("#myScale").slider({
+        range: true,
+        min: 0,
+        max: 10,
+        values: [3, 8],
+        stop: onStop
+      })
+      $("#city").selectmenu()
+    });
+  </script>
+</head>
+
+<body>
+  <h1>Example 67 - Range Slider & SelectMenu </h1>
+  <br>
+  <div id="myScale"></div>
+  <br>
+  <br>
+  <label for="city">Select City</label>
+  <select id="city">
+    <option disabled selected>Choose a city</option>
+    <optgroup label="M.P">
+      <option value="1">Ujjain</option>
+      <option value="2">Indore</option>
+    </optgroup>
+    <optGroup label="Maharashtra">
+      <option value="3">Pune</option>
+      <option value="4">Mumbai</option>
+    </optGroup>
+  </select>
+  <br>
+  <br>
+  <a href='/'> Home </a>
+</body>
+
+</html>

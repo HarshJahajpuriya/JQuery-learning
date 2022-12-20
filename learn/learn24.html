@@ -1,0 +1,27 @@
+<!DCOTYPE html>
+<html lang = 'en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='/jquery/jquery-3.6.0.min.js'></script>
+<script>
+$(() => {
+$(document).keyup((ev) => {
+alert("key property of event object : " + ev.key);
+// The key property holds the alphabet which is pressed.
+//alert("keyCode property of event object : " + ev.keyCode);
+// The keyCode property holds an unique number for each key
+//alert("charCode property of event object : " + ev.charCode);
+// In case of keyup event the charCode holds the value 0.
+//alert(ev.which);
+// The which propert holds an unique number for each key, same as keyCode property
+});
+}); 
+</script>
+</head>
+<body>
+<h1>Example 24: keyup</h1>
+<br>
+<a href='/'>Home</a>
+</body>
+</html> 

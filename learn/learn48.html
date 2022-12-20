@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<link rel='stylesheet' href='jquery-ui-1.13.0/jquery-ui.css'>
+<script src='jquery/jquery-3.6.0.min.js'> </script>
+<script src='jquery-ui-1.13.0/jquery-ui.js'> </script>
+<script>
+
+function getFirstNames(starting) {
+var promise = new Promise((resolve) => {
+fetch('/getFirstNames')
+.then((response) => {
+return response.json();
+}).then((names) => {
+resolve(names)
+})
+})
+return promise;
+}
+
+$(() => {
+
+$('#firstName').autocomplete({
+source: function(data, giveBackThrough) {
+var promise = getFirstNames();
+promise.then((firstNames) => {
+giveBackThrough(firstNames);
+})
+}
+})
+
+});
+</script>
+</head>
+<body>
+<h1>Example 48- JQuery-UI (autocomplete using data from server)</h1>
+First Name: <input type='text' id='firstName'><br><br>
+<br>
+<a href='/'> Home </a>
+</body>
+</html>

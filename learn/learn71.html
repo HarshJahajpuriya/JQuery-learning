@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <script src='jquery/jquery-3.6.0.min.js'> </script>
+  <script src="jquery-ui-1.13.0/jquery-ui.js"></script>
+  <link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.css" />
+  <script>
+    let teams = [];
+    $(() => {
+      $.ajax({
+        url: 'getTeams',
+        success: function (res) {
+          let connectWithStr = '#players,';
+          teams = res;
+          for (let team of res) {
+            let t = `
+            <div>
+              <h3>${team.name}</h3> 
+              <ul id="${team.id}"></ul>
+            </div>
+            `
+            $('#teams').append(t);
+            connectWithStr += ` #${team.id}, `
+          }
+
+          connectWithStr = connectWithStr.slice(0, connectWithStr.length-2)
+          
+          $(connectWithStr).disableSelection();
+          $("#players").sortable({
+            connectWith: connectWithStr,
+            receive: function(ev, ui) {
+              let newTeamId = (ev.target.id)
+              let playerId = (ui.item.prop("id"))
+              updatePlayer(playerId, newTeamId)
+            }
+          });
+          for(let team of teams) {
+            $("#"+team.id).sortable({
+              connectWith: connectWithStr,
+              receive: function(ev, ui) {
+                let newTeamId = (ev.target.id)
+                let playerId = (ui.item.prop("id"))
+                updatePlayer(playerId, newTeamId)
+              }
+            });
+          }        
+        },
+        error: function (err) {
+          console.log(err)
+        }
+      })
+
+      $.ajax({
+        url: "getPlayers",
+        success: function (players) {
+          for (let player of players) {
+            var p = (`<li id="${player.id}">${player.name}</li>`);
+            $(`#${player.teamId != null ? player.teamId : 'players'}`).append(p)
+          }
+        },
+        error: function (err) {
+          console.log(err);
+        }
+      })
+    });
+
+    function updatePlayer(playerId, newTeamId) {
+      console.log(`updatePlayer?playerId=${playerId}&newTeamId=${newTeamId}`);
+      $.ajax({
+        url: `updatePlayer?playerId=${playerId}&newTeamId=${newTeamId}`,
+        success: function(res) {
+          console.log("Done");
+        },
+        error: function(err) {
+          console.log(err);
+        }
+      })
+    }
+
+  </script>
+  <style>
+    ul {
+      width: 200px;
+      border: 1px solid gray;
+      padding: 10px;
+      list-style: none;
+    }
+
+    li {
+      padding: 2px 4px;
+      cursor: pointer;
+    }
+
+    li:hover {
+      background-color: orange;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Example 71 - Sharing data between multiple lists (using sortable)</h1>
+  <h3>Players</h3>
+  <ul id="players">
+  </ul>
+  <div id="teams">
+  </div>
+  <a href='/'> Home </a>
+</body>
+
+</html>

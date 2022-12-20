@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='/jquery/jquery-3.6.0.min.js'></script>
+<script>
+function doSomething() {
+alert('Something happened');
+}
+function doSomethingElse() {
+alert('Something else happened');
+}
+
+//window.onload=doSomething;
+// We are assigning reference of a function window.onload variable, which will get executed on loading of the DOM.
+
+// If we want to execute 2 function
+/*window.onload=doSomething;
+window.onload=doSomethingElse;*/
+// Here we have assigned reference of function doSomething, and then we have replace that reference with the reference of function doSomethingElse.
+// Therefore, doSomethingElse function will execute once the DOM is loaded.
+
+// SOLUTION
+/*window.addEventListener('load', doSomething);
+window.addEventListener('load', doSomethingElse);*/
+// These will execute the DOM is loaded, including all the required resources.
+// OR
+$(doSomething);
+$(doSomethingElse);
+// These will execute once the DOM is loaded, loading of all the required resouces are not necessary.
+
+</script>
+</head>
+<!-- <body onLoad='doSomething()'> -->
+<body>
+<h1>Example 12: Executing something after DOM is loaded (different ways)</h1>
+<br><a href='/'>Home</a>
+</body>
+</html>

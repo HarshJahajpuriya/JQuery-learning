@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>AJAX-1 (Without JQuery)</title>
+<style>
+table {
+border: 1px solid black;
+border-collapse: collapse;
+}
+table th, td {
+border: 1px solid black;
+padding: 4px 8px;
+}
+</style>
+<script src="jquery/jquery-3.6.0.min.js"></script>
+<script>
+// In this example, we are using JQUERY 
+
+$(() => {
+$.get('getEmployees', (employees, status) => {
+if(status==='success') {
+var tbody = $('#employeesViewTable').find('tbody');
+var i, row, cell;
+i=0;
+while(i<employees.length) {
+row = $('<tr>');
+cell = $(`<td>${i+1}</td>`)
+row.append(cell);
+cell = $(`<td>${employees[i].id}</td>`)
+row.append(cell);
+cell = $(`<td>${employees[i].firstName}</td>`)
+row.append(cell);
+cell = $(`<td>${employees[i].lastName}</td>`)
+row.append(cell);
+tbody.append(row);
+i++;
+}
+}
+});
+});
+
+</script>
+</head>
+<body>
+<h1>Example 40 (AJAX-2) - Using JQUERY (get method)</h1>
+<h2>Employees</h2>
+<table id='employeesViewTable'>
+<thead>
+<tr>
+<th>S.No.</th>
+<th>Id.</th>
+<th>First name</th>
+<th>Last name</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<br>
+<a href='/'> Home </a>
+</body>
+</html>

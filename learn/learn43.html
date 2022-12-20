@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='/jquery/jquery-3.6.0.min.js'> </script>
+<script>
+var clockStarted;
+function updateTime() {
+if(clockStarted == false) return;
+var date = new Date();
+var time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+$('#theClock').html(time);
+setTimeout(updateTime, 1000);
+// We are calling updateTime() function after 1 second only once.
+// But when we call updateTime() function the setTimeout function resets and 
+// again after one second updateTimeout function is invoked.
+}
+
+function startClock() {
+clockStarted = true;
+updateTime();
+}
+function stopClock() {
+clockStarted = false;
+}
+</script>
+</head>
+<body>
+<h1>Example 43 - Clock (using setTimeout) </h1>
+<div id='theClock'></div>
+<br>
+<button type='button' onClick='startClock()'>Start Clock</button>
+<br>
+<br>
+<button type='button' onClick='stopClock()'>Stop Clock</button>
+<br>
+<br>
+<a href='/'> Home </a>
+</body>
+</html>

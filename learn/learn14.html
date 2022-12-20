@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='/jquery/jquery-3.6.0.min.js'></script>
+<script>
+
+$(() => {
+
+$('#button1').click(()=> {
+alert('Button1 clicked');
+});
+
+$('#text1').change(() => {
+alert('Text1 content changed');
+}); 
+
+$('#text1').focus(() => {
+$('#noticeBoard1').html('Text1 got focus');
+});
+
+$('#text1').blur(() => {
+$('#noticeBoard1').html('Text1 lost focus');
+});
+
+$('#text2').focus(() => {
+$('#noticeBoard2').html('Text2 got focus');
+});
+
+$('#text2').blur(() => {
+$('#noticeBoard2').html('Text2 lost focus');
+});
+
+$('#city').change((ev) => {
+alert($(ev.target).html());
+alert($(ev.target).find(':selected').val());
+alert($(ev.target).find(':selected').text());
+});
+
+});
+
+</script>
+</head>
+<body>
+<h1>Example 14: Adding Event Listeners without using ON</h1>
+<button type='button' id='button1'>Click Me</button> <br>
+Text 1 <input type='text' id='text1' /> <br>
+Text 2 <input type='text' id='text2' /> <br>
+Select city:
+<select id='city'>
+<option value=1>Indore</option>
+<option value=2>Mumbai</option>
+<option value=3>Pune</option>
+<option value=4>Banglore</option>
+<option value=5>Chennai</option>
+</select> <br> <br>
+<div id='noticeBoard1'></div>
+<div id='noticeBoard2'></div>
+<br><a href='/'>Home</a>
+</body>
+</html>

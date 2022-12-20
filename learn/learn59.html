@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script>
+  var x = 1;
+  function doSomething() {
+    try {
+      if(x<50) throw new Error(`Cannot process ${x} as it is less than 50`)
+      if(x>5000) throw `${x} is greater than 5000 could not be processed`;
+      if(x%2 == 0) throw x;
+      else alert(x+1)
+    } catch(e) {
+      // alert(e)
+      // alert(e instanceof Error)
+      if(typeof x === "string") alert("Number greater than 5000 cannot be processed")
+      else if (typeof x === "number") alert("Even number cannot be processed");
+      else if(e instanceof Error) alert("Even number cannot be processed")
+    }
+  }
+</script>
+</head>
+<body>
+  <h1>Example 58: Handling multiple errors thrown from try block </h1>
+  <button type="button" onclick="doSomething()">Click Me</button>
+<br>
+<a href='/'> Home </a>
+</body>
+</html>

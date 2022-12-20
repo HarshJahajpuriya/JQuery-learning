@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='/jquery/jquery-3.6.0.min.js'> </script>
+<style>
+#homeLink 
+{
+position: absolute;
+right: 10px;
+top: 10px;
+}
+.city 
+{
+border: 2px solid red;
+position: relative;
+top: 80px;
+left: 25px;
+padding: 5px;
+width: 200px;
+margin-top: 10px
+}
+.checkers 
+{
+position: absolute;
+bottom: 10px;
+border: 2px solid gray;
+left: 10px;
+right: 10px;
+padding: 6px;
+}
+</style>
+<script>
+
+$(() => {
+
+var originalLeft = $('.city').css('left');
+
+$('input:checkbox').click(ev => {
+//alert('Here');
+//alert($(ev.currentTarget).val());
+//alert($(ev.currentTarget).is(':checked'));
+
+var checkboxRef = $(ev.currentTarget);
+var divisionId = checkboxRef.val();
+var isChecked = checkboxRef.is(':checked');
+var divisionRef = $('#' + divisionId);
+//console.dir(divisionId)
+//console.dir(isChecked)
+//console.dir(divisionRef)
+
+if(isChecked) 
+{
+var bodyWidth = parseFloat($('body').css('width'));
+var divisionWidth = parseFloat(divisionRef.css("width"));
+var leftMargin = bodyWidth - (divisionWidth + 60) + 'px';
+divisionRef.animate({left:leftMargin}, 'slow', 'swing')
+} 
+else 
+{
+divisionRef.animate({left:originalLeft}, 'slow', 'swing');
+}
+
+})
+
+
+$(window).on('resize', () => {
+//alert('resized')
+$('input:checkbox').each(function() {
+var isChecked = $(this).is(":checked");
+if(isChecked) 
+{
+var bodyWidth = parseFloat($('body').css('width'));
+var divisionWidth = parseFloat($('.city').css('width'));
+//console.log(bodyWidth);
+//console.log(divisionWidth);
+var leftMargin = bodyWidth - (divisionWidth + 60) + 'px';
+var divisionId = $(this).val();
+var divisionRef = $('#'+divisionId);
+//console.log(divisionId);
+//console.log(leftMargin);
+divisionRef.animate({left: leftMargin}, 'fast', 'swing');
+}
+});
+});
+
+
+});
+
+</script>
+</head>
+<body>
+<h1>Example 37: Sliding divisions</h1>
+<a id='homeLink' href='/'> Home </a>
+
+<h3 style='position: absolute; left: 80px;'>Tour Options</h3>
+<h3 style='position: absolute; right: 80px;'>Selected Tour Options</h3>
+
+<div class='city' id='d1'>
+<b> Ujjain </b><br>
+<u> City of Gods </u>
+</div>
+
+<div class='city' id='d2'>
+<b> Indore </b><br>
+<u> City of Maharajas </u>
+</div>
+
+<div class='city' id='d3'>
+<b> Bhopal </b><br>
+<u> City of Lakes </u>
+</div>
+
+<div class='city' id='d4'>
+<b> Jaipur </b><br>
+<u> City of Gods </u>
+</div>
+
+<div class='checkers'>
+Ujjain <input type='checkbox' value='d1'>&nbsp;&nbsp;|&nbsp;&nbsp; 
+Indore <input type='checkbox' value='d2'>&nbsp;&nbsp;|&nbsp;&nbsp;
+Bhopal <input type='checkbox' value='d3'>&nbsp;&nbsp;|&nbsp;&nbsp;
+Jaipur <input type='checkbox' value='d4'>&nbsp;&nbsp;|&nbsp;&nbsp;
+</div>
+
+</body>
+</html>

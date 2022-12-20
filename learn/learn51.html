@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.css">
+<script src='jquery/jquery-3.6.0.min.js'> </script>
+<script src="jquery-ui-1.13.0/jquery-ui.js"> </script>
+<script>
+  $(() => {
+    $('#dob1').datepicker({
+      showOn: 'button',
+      defaultDate: '26/12/1999',
+      dateFormat : "dd/mm/yy",
+    })
+
+    $('#dob2').datepicker({
+      showOn: 'both',
+      buttonText: 'calendar',
+      dateFormat: 'dd/mm/yy'
+    })
+
+    $('#dob3').datepicker({
+      showOn: 'both',
+      dateFormat: 'dd/mm/yy',
+      buttonImage: "images/calendar.png"
+    })
+
+    $('#dob4').datepicker({
+      showOn: 'both',
+      dateFormat: 'dd/mm/yy',
+      buttonImage: "images/calendar.png",
+      buttonImageOnly: true,
+      changeYear: true,
+      "changeMonth": true,
+      showWeek: true,
+      showButtonPanel: true,
+      minDate: '10/05/2021',
+      maxDate: '10/06/2022'
+    })
+
+  });
+
+</script>
+</head>
+<body>
+  <h1>Example 51 - datepicker (Button)</h1>
+  Enter Date Of Birth : <input type='text' id="dob1"> <br><br>
+  Enter Date of Birth : <input type="text" id="dob2"> <br><br>
+  Enter Date of Birth : <input type="text" id="dob3"> <br><br>
+  Enter Date of Birth : <input type="text" id="dob4"> <br><br>
+<br>
+<a href='/'> Home </a>
+</body>
+</html>

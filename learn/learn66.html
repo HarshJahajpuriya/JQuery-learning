@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.css">
+  <script src='jquery/jquery-3.6.0.min.js'></script>
+  <script src="jquery-ui-1.13.0/jquery-ui.js"></script>
+  <script>
+    var rgbCode = "";
+    var hexCode = "";
+    function updateNoticeBoard() {
+      var red = $(".redSlider").slider("value");
+      var green = $(".greenSlider").slider("value");
+      var blue = $(".blueSlider").slider("value");
+
+      
+      var redHex = red.toString(16);
+      var greenHex = green.toString(16);
+      var blueHex = blue.toString(16);
+      
+      rgbCode = "rgb("+red+","+green+","+blue+")";
+      hexCode = "#"+redHex+greenHex+blueHex;
+
+      $(".rightPanel").css("backgroundColor", hexCode)
+
+      $(".rgbContent").html(`<b>${rgbCode}</b>`);
+      $(".hexContent").html(`<b>${hexCode}</b>`);
+    }
+
+    function copyRgbCode() {
+      $(".rgbContent").select();
+      navigator.clipboard.writeText(rgbCode);
+      alert(rgbCode);
+    }
+
+    function copyHexCode() {
+      $(".hexCode").select();
+      navigator.clipboard.writeText(hexCode);
+      alert(hexCode);
+    }
+
+    $(() => {
+      $("#rgbCopyButton").button()
+      $("#hexCopyButton").button()
+      $(".redSlider, .greenSlider, .blueSlider").slider({
+        min: 0,
+        max: 255,
+        slide: updateNoticeBoard,
+        stop: updateNoticeBoard
+      });
+      // $(".greenSlider").slider({
+      //   min: 0,
+      //   max: 255,
+      //   slide: updateNoticeBoard,
+      //   stop: updateNoticeBoard
+      // });
+      // $(".blueSlider").slider({
+      //   min: 0,
+      //   max: 255,
+      //   slide: updateNoticeBoard,
+      //   stop: updateNoticeBoard
+      // });
+      updateNoticeBoard();
+    });
+  </script>
+  <style>
+    .colorPicker {
+      border: 1px solid orange;
+      padding: 24px;
+      display: flex;
+    }
+    .leftPanel {
+      flex: 8
+
+    }
+    .rightPanel {
+      flex: 4;
+      border: 2px solid gainsboro;
+      border-radius: 21px;
+      padding: 24px;
+      margin-left: 24px;
+    }
+    .noticeBoard {
+      display: flex;
+    }
+    .rgbPane {
+      flex: 6;
+      text-align: center;
+      padding: 60px
+    }
+    .hexPane {
+      flex: 6;
+      text-align: center;
+      padding: 60px
+    }
+    .redSlider {
+      background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(255,0,0));
+      margin-bottom: 13px;
+    }
+    .greenSlider {
+      background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(0,255,0));
+      margin-bottom: 13px;
+    }
+    .blueSlider {
+      background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(0,0,255));
+    }
+    .heading {
+      border-bottom: 1px solid gray;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Example 66 - Color Picker Slider</h1>
+  <br>
+  <br>
+  <div class="colorPicker">
+    <div class="leftPanel">
+      <div class="redSlider"></div>
+      <div class="greenSlider"></div>
+      <div class="blueSlider"></div>
+    </div>
+    <div class="rightPanel"></div>
+  </div>
+  <br>
+  <br>
+  <div class="noticeBoard">
+    <div class="rgbPane">
+      <h3 class="heading">RGB</h3>
+      <div class="rgbContent"></div>
+      <br><br>
+      <button id="rgbCopyButton" onclick="copyRgbCode()">Copy Code</button>
+    </div>
+    <div class="hexPane">
+      <h3 class="heading">HEX</h3>
+      <div class="hexContent"></div>
+      <br><br>  
+      <button id="hexCopyButton" onclick="copyHexCode()">Copy Code</button>
+    </div>
+  </div>
+  <br>
+  <br>
+  <a href='/'> Home </a>
+</body>
+
+</html>

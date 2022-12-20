@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='/jquery/jquery-3.6.0.min.js'></script>
+<script>
+function doSomething() 
+{
+//alert($('p').length);
+//alert($('.slogan').length);
+//alert($('#motto').length);
+alert($('p').html());
+alert($('.slogan').html());
+alert($('#motto').html());
+alert($('div.slogan').html());
+$('p').each((i, c) => {
+alert(i+", "+c.innerHTML)
+})
+}
+</script>
+</head>
+<body>
+<h1>Example 4: JQuery Selectors-I (id, class, tag)</h1>
+<p>Thinking Machines</p>
+<p>Ujjain is the city of GODS</p>
+<div class='slogan'>We teach more than we promise to teach</div>
+<div id='motto'>Think Big!!!</div>
+<button type='button' onClick='doSomething()'>Click Me</button>
+<br><a href='/'>Home</a>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.css">
+  <script src='jquery/jquery-3.6.0.min.js'> </script>
+  <script src="jquery-ui-1.13.0/jquery-ui.js"></script>
+  <script>
+
+  function onActivated(ev, ui) {
+    console.log("OLD "+ui.oldTab.prop("id"))
+    console.log("NEW "+ui.newTab.prop("id"))
+  }
+  function doSomething() {
+    console.log("INDEX "+$("#crudPanel").tabs("option", "active"))
+  }
+
+  $(() => {
+    $("#crudPanel").tabs({
+      active: 1,
+      // show: {effect: "blind", duration: 200},
+      activate: onActivated
+    });
+  });
+  </script>
+</head>
+
+<body>
+  <h1>Example 64 - Navigation Tabs</h1>
+
+  <div id="crudPanel">
+    <ul>
+      <li id="t1"><a href="#viewPane">Students</a></li>
+      <li id="t2"><a href="#addPane">Add Students</a></li>
+      <li id="t3"><a href="#editPane">Edit Students</a></li>
+      <li id="t4"><a href="#deletePane">Delete Students</a></li>
+    </ul>
+
+    <div id="viewPane">
+      <h2>Students</h2>
+    </div>
+
+    <div id="addPane">
+      Student Add Module
+    </div>
+
+    <div id="editPane">
+      Student Edit Module
+    </div>
+
+    <div id="deletePane">
+      Student Delete Module
+    </div>
+  </div>
+
+
+  <br> <br> <br>
+  <button type="button" onclick="doSomething()">Click Me</button>
+  <br> <br> <br>
+  <a href='/'> Home </a>
+</body>
+
+</html>

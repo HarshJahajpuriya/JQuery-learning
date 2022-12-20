@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <script src='jquery/jquery-3.6.0.min.js'> </script>
+  <script src="jquery-ui-1.13.0/jquery-ui.js"></script>
+  <link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.css"/>
+  <script>
+    $(() => {
+      $.ajax({
+        url: 'getCities',
+        success: function(res) {
+          for(city of res) {
+            let listEl = $(`<li id=${city.id} oldIdx=${city.sortOrder} newIdx=${city.sortOrder}>${city.name}</li>`)
+            $("#cities").append(listEl)
+          }
+          console.log(res)
+        },
+        error: function(err) {
+          console.log(err)
+        }
+      })
+
+      $("#cities").disableSelection();
+
+      let startIdx, endIdx;
+      $("#cities").sortable({
+        start: function(ev, ui) {
+          startIdx = ui.item.index();
+        },
+        update: function(ev, ui) {
+          endIdx = ui.item.index();
+          console.log(ui.item.text())
+          updateCities(startIdx,endIdx)
+        }
+      });
+    });
+    
+    function updateCities(startIdx, endIdx) {
+      $.ajax({
+        url: `updateCityOrder?start=${startIdx}&end=${endIdx}`,
+        succes: function(res) {
+          console.log(res)
+        },
+        error: function(err) {
+          alert("Cannot update database")
+        }
+      })
+    }
+
+  </script>
+  <style>
+    #cities {
+      width: 200px;
+      border: 1px solid gray;
+      padding: 10px;
+      list-style: none;
+    }
+    #cities>li {
+      padding: 2px 4px;
+      cursor: pointer;
+    }
+    #cities>li:hover {
+      background-color: orange;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Example 69 - Sortable & Disable selection</h1>
+  <br>
+  <ul id="cities">
+  </ul>
+  <br>
+  <br>
+  <a href='/'> Home </a>
+</body>
+
+</html>

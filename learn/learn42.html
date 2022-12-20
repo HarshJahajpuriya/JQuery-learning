@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>AJAX-1 (Without JQuery)</title>
+<style>
+table {
+border: 1px solid black;
+border-collapse: collapse;
+}
+table th, td {
+border: 1px solid black;
+padding: 4px 8px;
+}
+</style>
+<script>
+// In this example, we are not using JQUERY 
+
+window.addEventListener('load', ()=>{
+fetch('getEmployees').then((response)=>{
+return response.json();
+}).then((employees)=>{
+var table = document.getElementById('employeesViewTable');
+var tbody = table.getElementsByTagName("tbody")[0];
+var row, cell;
+for(var i=0; i<employees.length; i++) {
+row = document.createElement("tr");
+cell = document.createElement("td");
+cell.append(document.createTextNode(i+1));
+row.append(cell);
+cell = document.createElement("td");
+cell.append(document.createTextNode(employees[i].id));
+row.append(cell);
+cell = document.createElement("td");
+cell.append(document.createTextNode(employees[i].firstName));
+row.append(cell);
+cell = document.createElement("td");
+cell.append(document.createTextNode(employees[i].lastName));
+row.append(cell);
+tbody.append(row);
+}
+})
+})
+
+</script>
+</head>
+<body>
+<h1>Example 42 (AJAX-4) - Using Fetch API</h1>
+<h2>Employees</h2>
+<table id='employeesViewTable'>
+<thead>
+<tr>
+<th>S.No.</th>
+<th>Id.</th>
+<th>First name</th>
+<th>Last name</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<br>
+<a href='/'> Home </a>
+</body>
+</html>

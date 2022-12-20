@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<script src='jquery/jquery-3.6.0.min.js'> </script>
+<script>
+$(() => {
+$('#feature').click(() => {
+$('#something').toggle();
+// By default the toggle will toggle the display property of an element.
+// No animation will be there.
+});
+});
+</script>
+<title>Learning JQuery</title>
+</head>
+<body>
+<h1>Example 17: Hiding div (Using toggle)</h1>
+<div id='something'>
+<h2>Thinking machines</h2>
+<h3>Think Big!!!</h3>
+</div>
+Hide <input type='checkbox' id='feature'>
+<br>
+<br>
+<a href='/'> Home </a>
+</body>
+</html>

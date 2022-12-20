@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.css">
+  <script src='jquery/jquery-3.6.0.min.js'> </script>
+  <script src="jquery-ui-1.13.0/jquery-ui.js"></script>
+  <script>
+    $(() => {
+      $('tbody').selectable({
+        filter: 'tr',
+        selected: function(ev, ui) {
+          $(ui.selected).siblings().removeClass('ui-selected');
+        }
+      })
+    })
+  </script>
+  <style>
+    .ui-selected {
+      background-color: gray;
+      color: white;
+    }
+    table {
+      border: 1px solid gray;
+      border-collapse: collapse;
+    }
+    tbody>tr {
+      cursor: pointer;
+    }
+    th {
+      border: 1px solid gray;
+      border-collapse: collapse;
+      padding: 4px
+    }
+    td {
+      border: 1px solid gray;
+      border-collapse: collapse;
+      padding: 4px;;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Example 75 - Selectable table </h1>
+  <br>
+  <table>
+    <thead>
+      <tr>
+        <th>S. No.</th>
+        <th>City code</th>
+        <th>City</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>101</td>
+        <td>Indore</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>102</td>
+        <td>Ujjain</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>103</td>
+        <td>Dewas</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>104</td>
+        <td>Mhow</td>
+      </tr>
+    </tbody>
+  </table>
+  <br>  
+  <a href='/'> Home </a>
+</body>
+
+</html>

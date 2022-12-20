@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script> 
+function computeFactorial(num) {
+  var promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if(num %2 === 0) {
+        var e=f=1;
+        while(e<=num) {
+          f = f*e;
+          e++;
+        }
+        resolve(f);
+      } else {
+        reject("I am unable to compute factorial of odd number");
+      }
+    }, 3000)
+  });
+  return promise;
+}
+
+function doSomething() {
+  var numRef = document.getElementById("nn");
+  var num = +numRef.value;
+  computeFactorial(num)
+  .then(
+    (res) => {
+      alert(res);
+    }, 
+    (err)=> {
+      alert(err);
+    }
+  )
+}
+
+</script>
+<script>
+</script>
+</head>
+<body>
+  <h1>Example 57</h1>
+  Enter a number: <input type="text" id="nn">
+  <button type="button" onclick="doSomething()">Compute</button>
+<br>
+<a href='/'> Home </a>
+</body>
+</html>

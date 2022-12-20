@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.css">
+  <script src='jquery/jquery-3.6.0.min.js'> </script>
+  <script src="jquery-ui-1.13.0/jquery-ui.js"></script>
+  <script>
+    $(() => {
+      $("#thinkingMachines").hide();
+    })
+    const doSomething = () => {
+      $("#thinkingMachines").dialog({
+        "title": "Notification",
+        "width": 500,
+        "height": 400,
+        // "resizable": false,
+        "draggable": false,
+        "modal": true,
+        "resizable": true,
+        "maxWidth": 600,
+        "maxHeight": 500,
+        "minWidth": 400,
+        "minHeight": 300,
+        "closeOnEscape": false,
+        // "show": {effect: "blind", duration: 2000},
+        // "hide": {effect: "blind", duration: 2000},
+        "show": {effect: "fadeIn", duration: 2000},
+        "hide": {effect: "fadeOut", duration: 2000},
+      })
+    }
+  </script>
+</head>
+
+<body>
+  <h1>Example 62 - Dialog Style</h1>
+  <br>
+  <br>
+  Enter your name &nbsp;<input type="text" name="name" id="name">
+  <div id="thinkingMachines"> 
+    <h1>Thinking Machines</h1>
+    <h3>Think Big!!!</h3>
+    <h5>Learn more than you can</h5>
+  </div>
+  <br>
+  <br>
+  <br>
+  <button type="button" onclick="doSomething()">Click Me</button>
+  <br>
+  <br>
+  <a href='/'> Home </a>
+</body>
+
+</html>

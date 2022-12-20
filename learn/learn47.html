@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<link rel='stylesheet' href='jquery-ui-1.13.0/jquery-ui.css'>
+<script src='jquery/jquery-3.6.0.min.js'> </script>
+<script src='jquery-ui-1.13.0/jquery-ui.js'> </script>
+<script>
+
+var firstNames = ['Yash', 'Harsh', 'Pawan', 'Pradeep', 'Sahil', 'Sambhavi', 'Lucky', 'Lalit', 'Adarsh', 'Atharv', 'Asmita', 'Harshita'];
+
+var lastNames = ['Jahajpuriya', 'Pandey', 'Patidar', 'Patel', 'Sethiya', 'Joshi', 'Shukla', 'Verma', 'Sharma', 'Dhadad', 'Gupta', 'Rawat'];
+
+
+$(() => {
+
+// This will show all the options having sequence of characters in it.
+$('#firstName').autocomplete({
+source: firstNames
+});
+
+$('#lastName').autocomplete({
+source: function(data, giveBackThrough) {
+//console.log(data.term);
+// data.term contains the characters entered
+// giveBackThrough is the refernce to a function, to whom whatever we pass will displayed as the 
+// options.
+var lst = [];
+var  i =0;
+while(i<lastNames.length) {
+if(lastNames[i].toLowerCase().startsWith(data.term.toLowerCase())) {
+lst.push(lastNames[i]);
+}
+i++;
+}
+giveBackThrough(lst);
+}
+});
+
+});
+</script>
+</head>
+<body>
+<h1>Example 47 JQuery-UI (autocomplete)</h1>
+First Name: <input type='text' id='firstName'><br><br>
+Last Name: <input type='text' id='lastName'><br><br>
+<br>
+<a href='/'> Home </a>
+</body>
+</html>

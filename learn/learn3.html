@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<style>
+.cool {
+color: #FF43BB;
+}
+</style>
+<script src='/jquery/jquery-3.6.0.min.js'></script>
+<script>
+function classAdder() {
+$('.tmclass').addClass('cool');
+}
+function classRemover() {
+$('.tmclass').removeClass('cool');
+}
+$(classAdder);
+</script>
+</head>
+<body>
+<h1>Example 3 - Adding and Removing CSS class</h1>
+<div class='tmclass'>Thinking Machines</div>
+<div class='tmclass'>We teach more than we promise to teach</div>
+<div class='tmclass'>Think Big!!!</div>
+<button type='button' onClick='classAdder()'>Apply style</button><br>
+<button type='button' onClick='classRemover()'>Remove style</button><br>
+<br><a href='/'>Home</a>
+</body>
+</html>

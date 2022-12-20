@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<style>
+#cos td, th {
+border: 2px solid black;
+padding: 4px;
+cursor: pointer;
+}
+#cos {
+border-collapse: collapse;
+}
+.xyz {
+background-color: black;
+color: white;
+}
+</style>
+<script src='/jquery/jquery-3.6.0.min.js'> </script>
+<script>
+var selectedRow = null;
+$(() => {
+$('#cos').click(function(ev) {
+if(ev.target.tagName == 'TD') {
+// $(this).addClass('xyz'); // whole table will look as if selected
+// $(ev.target).addClass('xyz'); // the TD will look as if selected
+if(selectedRow) $(selectedRow).removeClass('xyz');
+selectedRow = ev.target.parentElement;
+$(selectedRow).addClass('xyz');
+}
+});
+});
+</script>
+</head>
+<body>
+<h1>Example 21: Parent Element</h1>
+<table id='cos'>
+<thead>
+<tr>
+<th>S.No.</th>
+<th>Company</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.</td>
+<td>Google</td>
+</tr>
+<tr>
+<td>2.</td>
+<td>Microsoft</td>
+</tr>
+<tr>
+<td>3.</td>
+<td>Walkover</td>
+</tr>
+<tr>
+<td>4.</td>
+<td>CodeFlex</td>
+</tr>
+<tr>
+<td>5.</td>
+<td>Thinking Machines</td>
+</tr>
+</tbody>
+</table>
+<br>
+<a href='/'> Home </a>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='/jquery/jquery-3.6.0.min.js'></script>
+<script>
+
+// Using JavaScript
+//window.addEventListener('load', function() {
+//alert(document.getElementById('tm').innerHTML);
+//});
+
+// Passing reference of a function
+function cool() {
+alert($('#tm').html());
+}
+$(cool)
+
+// Passing anonymous function
+$(function() {
+alert($('#tm').html())
+});
+
+// Arrow function / Lambda Function
+$(()=>{
+alert($('#tm').html());
+})
+
+</script>
+</head>
+<body>
+<h1>Example 1 - Execute a function ager DOM is fully Loaded</h1>
+<span id='tm'>Thinking Machines</span>
+<br><a href='/'>Home</a>
+</body>
+</html>

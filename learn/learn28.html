@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='/jquery/jquery-3.6.0.min.js'> </script>
+<script>
+$(() => {
+$(document).keypress((ev) => {
+var ss = ev.target.selectionStart;
+// The selectionStart holds the starting index of the selected part of the string,
+// and is nothing is selected then the selectionStart holds the index where the 
+// cursor lies before entering character
+var se = ev.target.selectionEnd;
+// The selectionEnd holds the end index of the selected part of the string, and if
+// nothing is selected then the selectionEnd holds the index where the cursor lies 
+// before entering character.
+alert(ss+","+se);
+});
+});
+
+const doSomething = () => {
+var  a = 'abcdefghijk';
+alert(a.slice(2,4));
+// The slice method will return the part of the string.
+// It accepts two arguments the first one is the starting index and
+// the second argument is the end index+1
+}
+</script>
+</head>
+<body>
+<h1>Example 28: selectionStart, selectionEnd and slice </h1>
+Enter city <input type='text' id='ct'><br><br>
+<button type='button' onclick='doSomething()'>Click me</button>
+<br>
+<br>
+<a href='/'> Home </a>
+</body>
+</html>

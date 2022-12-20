@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='/jquery/jquery-3.6.0.min.js'> </script>
+<script>
+const oneClicked = (ev) => {
+var a = "10";
+alert(a+20);	//	1020
+alert(20+a)	//	2010
+alert(parseInt(a) + 20);	// 30
+a = 'good10';
+alert(parseInt(a) + 20);	// NaN
+a = '10ood';
+alert(parseInt(a) + 20);	// 30
+a = '10go3od';
+alert(parseInt(a) + 20);	// 30
+a = "102.23devil";
+alert(parseFloat(a) + 20);	// 122.3
+}
+
+function twoClicked(ev) {
+var a = 10;
+var b = 20;
+var c = a+b;
+alert("Total is " + c);
+alert("Total is ${c}");
+alert(`Total is ${c}`);
+}
+</script>
+</head>
+<body>
+<h1> Example 30: Parsing and String concatenation</h1>
+<button onclick='oneClicked(this)' >Button 1</button> <br><br>
+<button onclick='twoClicked(this)' >Button 2</button> <br>
+<br>
+<a href='/'> Home </a>
+</body>
+</html>

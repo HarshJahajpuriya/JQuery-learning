@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<style>
+.homeLink 
+{
+position: absolute;
+top: 10px;
+right: 10px;
+}
+#abcd 
+{
+position: absolute;
+top: 80px;
+border: 2px solid gray;
+padding: 0 16px;
+padding-bottom: 10px;
+text-align: center;
+}
+</style>
+<script src='/jquery/jquery-3.6.0.min.js'> </script>
+<script>
+function moveMe() {
+//$('#abcd').animate({left:'800px'}, 'slow').animate({top:'1000px'}, 'slow');
+// These animations will execute in a queue.
+$('#abcd')
+.animate({left:'800px'},{duration:'slow', queue:false})
+.animate({top:'1000px'},{duration:'slow', queue:false});
+// These animations will execute parallely, 
+// but in order to execute them in parallel.
+// It is important to keep the duration same for all the animations.
+}
+</script>
+</head>
+<body>
+<h1>Example 38: Animation queue</h1>
+<a class='homeLink' href='/'> Home </a>
+<div id='abcd'>
+<h2>This is me</h2>
+<h3>Today is my day</h3>
+<button type='button' onClick='moveMe()'> Move Me</button>
+</div>
+</body>
+</html>

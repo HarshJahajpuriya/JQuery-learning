@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.css">
+  <script src='jquery/jquery-3.6.0.min.js'> </script>
+  <script src='jquery-ui-1.13.0/jquery-ui.js'> </script>
+  <script>
+    $(() => {
+      // $("#card").resizable()
+
+      // $("#card").resizable({
+      //   animate: true,
+      //   helper: "helper-border"
+      // })
+
+      // $("#card").resizable({
+      //   maxWidth: 500,
+      //   maxHeight: 400,
+      //   minWidth: 300,
+      //   minHeight: 200
+      // })
+
+      // $("#card").resizable({
+      //   aspectRatio: 16/9
+      // })
+
+      // $("#card").resizable({
+      //   ghost: true
+      // })
+      
+      $("#card").resizable({
+        alsoResize: "#card-1"
+      })
+      $("#card-1").resizable()
+      
+    })
+  </script>
+  <style>
+    .helper-border {
+      border: 1px dotted orangered
+    }
+    #card {
+      width: 260px;
+      height: 200px;
+      padding: 10px;
+    }
+    #card-1 {
+      width: 260px;
+      height: 200px;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Example 68 - ui-widget class & Resizable</h1>
+  <br>
+  <div id="card" class="ui-widget-content">
+    <h3 class="ui-widget-header">Header</h3>
+    Content<br>
+    Content<br>
+    Content<br>
+    Content<br>
+  </div>
+  <div id="card-1" class="ui-widget-content">
+    <h3 class="ui-widget-header">Header-2</h3>
+    Content2<br>
+    Content2<br>
+    Content2<br>
+    Content2<br>
+  </div>
+  <br>
+  <br>
+  <a href='/'> Home </a>
+</body>
+
+</html>

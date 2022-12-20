@@ -1,0 +1,34 @@
+<!DCOTYPE html>
+<html lang = 'en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='/jquery/jquery-3.6.0.min.js'></script>
+<script>
+$(() => {
+$(document).keypress((ev) => {
+// In case of keypress event, only typeable keys will be recognized.
+
+//alert('key property of event object : ' + ev.key);
+
+//alert("keyCode property of event object : " + ev.keyCode);
+// The keyCode prperty holds an unique number for each key (case sensitive)
+
+//alert("charCode property of event object : " + ev.charCode);
+// In case of keypress event charCode holds an unique number for each key (case sensitive)
+//alert(String.fromCharCode(ev.charCode));
+// Strng.fromCharCode function will return a character whose charCode or keyCode is passed.
+
+alert("which property of event object : " + ev.which);
+// The which property holds an unique number for each key, same as keyCode property
+
+});
+}); 
+</script>
+</head>
+<h1>Example 26: keypress</h1>
+<body>
+<br>
+<a href='/'>Home</a>
+</body>
+</html> 

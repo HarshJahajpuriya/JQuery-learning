@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='/jquery/jquery-3.6.0.min.js'></script>
+<style>
+.xyz {
+color:white;
+background-color:orangered;
+}
+table {
+border: 1px solid black;
+border-collapse:collapse;
+}
+td,th {
+border: 1px solid black;
+padding: 8px;
+}
+</style>
+<script>
+$(() => {
+// $('tr:even').addClass('xyz');
+// This will highlight all the even rows including the heading; Indexing:0
+$('tbody>tr:even').addClass('xyz');
+// This will highlight all the even rows of the table body; Indexing:0
+});
+function doSomething() {
+// alert($('tr:nth-child(0)').html());
+// Undefined; Indexing:1
+alert($('tr:nth-child(1)').html());
+// This will select row from table head; Indexing:1
+alert($('tr:eq(0)').html());
+// This will select row from the table head; Indexing:0
+alert($('tbody>tr:nth-child(1)').html())
+// Now, this will select the first row of the table body; Indexing:1
+alert($('tbody>tr:eq(0)').html());
+// This will also select the first row of the table body; Indexing:0
+alert($('tr:contains(Goo)').html());
+// This will select the rows containing 'Goo' in their data.
+alert($('tr:contains(Name)').html());
+// This will select the rows containing 'Name' in their data, in this case it is the table header.
+alert($('tr:contains(Kumar):odd').html())
+// This will filter all the rows containing 'Kumar' in their data, and then will select all the odd rows; Indexing:0
+}
+</script>
+</head>
+<body>
+<h1>Example 5: JQuery Selectors-II (odd, even, nth-child, eq, contains)</h1>
+<h3>Thinking Machines</h3>
+<h3>Placements 2021</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Company</th>
+<th>Package</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Harsh Kumar</td><td>Full Time</td><td>Microsoft</td><td>30 LPA</td>
+</tr>
+<tr>
+<td>Pawan Kumar</td><td>Google</td><td>Internship</td><td>100000 per month</td>
+</tr>
+<tr>
+<td>Yashraj Jahajpuriya</td><td>TCS</td><td>Full Time</td><td>20 LPA</td>
+</tr>
+<tr>
+<td>Aaditya</td><td>HDFC</td><td>Full Time</td><td>10 LPA</td>
+</tr>
+</tbody>
+</table>
+<br><button onClick='doSomething()'>Click Me</button>
+<br><a href='/'> Home </a>
+</body>
+</html>

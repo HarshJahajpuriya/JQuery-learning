@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='/jquery/jquery-3.6.0.min.js'></script>
+<style>
+.xyz {
+color:red;
+}
+.abc {
+color:green;
+}
+.pqr {
+color:blue;
+}
+.mno {
+color:brown;
+}
+.jkl {
+color:white;
+background-color:black;
+}
+</style>
+<script>
+function first() {
+$(':input').addClass('xyz');
+}
+function second() {
+$(':button').addClass('abc');
+}
+function third() {
+$(':disabled').addClass('pqr');
+}
+function fourth() {
+$(':enabled').addClass('mno');
+}
+function fifth() {
+$(':selected').addClass('jkl');
+}
+</script>
+</head>
+<body>
+<h1>Example 9: JQuery Selectors-VI (Form Selectors)</h1>
+<h3>Thinking Machines</h3>
+<form>
+Name <input enabled type='text' value='Harsh'><br>
+City <input disabled type='text' value='Indore'><br>
+Mo No. <input type='number' value='6263504490'><br>
+Indian <input checked type='checkbox'>Yes<br>
+Gender
+<select>
+<option>Select gender</option>
+<option selected>Male</option>
+<option>Female</option>
+</select><br>
+</form>
+<button onClick='first()'>Click Me</button><br>
+<button onClick='second()'>Click Me</button><br>
+<button onClick='third()'>Click Me</button><br>
+<button onClick='fourth()'>Click Me</button><br>
+<button onClick='fifth()'>Click Me</button><br>
+<br><a href='/'>Home</a>
+</body>
+</html>

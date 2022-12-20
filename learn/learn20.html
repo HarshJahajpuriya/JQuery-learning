@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='jquery/jquery-3.6.0.min.js'></script>
+<script>
+$(() => {
+
+// EVENT BUBBLING / EVENT PROPAGATION
+// Whenever we click an element, that elmenent is enclosed in another element.
+// So whenever an event fires for such element that event will fire for the parent element also.
+// This is called propagation of event.
+
+$('body').click((ev) => {
+alert('body clicked');
+alert('Target : ' + $(ev.target).html());
+alert('Current Target : ' + $(ev.currentTarget).html());
+});
+
+$('#s1').click((ev) => {
+alert('s1 clicked');
+alert('Target : ' + $(ev.target).html());
+alert('Current Target : ' + $(ev.currentTarget).html());
+});
+
+$('#s2').click((ev) => {
+alert('s2 clicked');
+});
+
+$('#s3').click((ev) => {
+alert('s3 clicked');
+ev.stopPropagation();
+alert('Target : ' + $(ev.target).html());
+alert('Current Target : ' + $(ev.currentTarget).html());
+// This will stop the propagation or bubbling.
+});
+
+$('#s4').click((ev) => {
+alert('s4 clicked');
+});
+
+$('#s5').click((ev) => {
+alert('s5 clicked');
+alert('Target : ' + $(ev.target).html());
+// Target is the element that triggered the event.
+alert('Current Target : ' + $(ev.currentTarget).html());
+// Current target is the element to which the event listener is attached to.
+});
+});
+</script>
+</head>
+<body>
+<h1>Example 20: Event propagation OR Event bubbling</h1>
+<div id='s1'>
+<h2 id='s2'>We teach more thatn we promise to teach</h2>
+<span id='s3'>
+<h3 id='s4'>Devil is in details</h3>
+<h3 id='s5'>Think Big!!!</h3>
+</span>
+</div>
+<br><br>
+<a href='/'>Home</a>
+</body>
+</html>

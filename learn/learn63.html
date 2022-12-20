@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.css">
+  <script src='jquery/jquery-3.6.0.min.js'> </script>
+  <script src="jquery-ui-1.13.0/jquery-ui.js"></script>
+  <script>
+    $(() => {
+      $("#thinkingMachines").hide();
+    })
+    function onCreate() {
+      $("#name").val("Cool")
+      $("#notice").html("Creating")
+    }
+    function onOpen() {
+      $("#notice").html("Opened")
+    }
+    function onClose() {
+      $("#notice").html("Closed")
+    }
+    function onBeforeClose() {
+      $("#notice").html("Closing")
+    }
+    function onDragStart() {
+      $("#notice").html("Dragging Started")
+    }
+    function onDragStop() {
+      $("#notice").html("Dragging Stopped")
+    }
+    var x= 0;
+    function onDrag() {
+      x++;
+      $("#notice").html("Dragging " + x)
+    }
+    const doSomething = () => {
+      $("#thinkingMachines").dialog({
+        "title": "Notification",
+        "show": {effect: "fadeIn", duration: 200},
+        "hide": {effect: "fadeOut", duration: 200},
+        "create": onCreate,
+        "open": onOpen,
+        "close": onClose,
+        "beforeClose": onBeforeClose,
+        "dragStart": onDragStart,
+        "dragStop": onDragStop,
+        "drag": onDrag
+      })
+    }
+  </script>
+</head>
+
+<body>
+  <h1>Example 63 - Dialog Actions</h1>
+  <br>
+  <br>
+  <div id="notice" style="color: red; font-size: 24pt;"></div>
+  <br>
+  <br>
+  Enter your name &nbsp;<input type="text" name="name" id="name">
+  <div id="thinkingMachines"> 
+    <h1>Thinking Machines</h1>
+    <h3>Think Big!!!</h3>
+    <h5>Learn more than you can</h5>
+  </div>
+  <br>
+  <br>
+  <br>
+  <button type="button" onclick="doSomething()">Click Me</button>
+  <br>
+  <br>
+  <a href='/'> Home </a>
+</body>
+
+</html>

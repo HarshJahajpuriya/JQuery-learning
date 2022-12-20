@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.css">
+  <script src='jquery/jquery-3.6.0.min.js'> </script>
+  <script src="jquery-ui-1.13.0/jquery-ui.js"></script>
+  <script>
+    $(() => {
+      $('input[type=checkbox').checkboxradio();
+      $('input[type=radio]').checkboxradio();
+    })
+  </script>
+</head>
+  <h1>Example 53 - jQuery checkboxradio()</h1>
+
+  <fieldset>
+    <legend>Personal Information</legend>
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name">
+    <label for="eduction">Education</label>
+    <input type="text" name="eduction" id="education">
+  </fieldset>
+  <br><br>
+
+  <fieldSet>
+    <legend>Nation</legend>
+    <label for="india">India</label>
+    <input type="radio" name="nation" id="india" value="C">
+    <label for="china">China</label>
+    <input type="radio" name="nation" id="china" value="C">
+    <label for="america">America</label>
+    <input type="radio" name="nation" id="america" value="A">
+    <label for="germany">Germany</label>
+    <input type="radio" name="nation" id="germany" value="G">
+  </fieldSet>
+  <br><Br>
+
+  <fieldset>
+    <legend>Hobbies</legend>
+    <label for="reading">Reading</label>
+    <input type="checkbox"  id="reading">
+    <label for="running">Running</label>
+    <input type="checkbox" id="running">
+    <label for="movies">Movies</label>
+    <input type="checkbox"  id="movies">
+  </fieldset>
+
+<body>
+  <br>
+  <a href='/'> Home </a>
+</body>
+
+</html>

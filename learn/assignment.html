@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='/jquery/jquery-3.6.0.min.js'></script>
+<style>
+#placementView {
+border: 1px solid black;
+border-collapse: collapse;
+}
+#placementView td, th {
+border: 2px solid black;
+padding: 10px;
+}
+#selectorBoxErrorSection {
+color:red;
+} 
+.xyz {
+color: white;
+background-color: orangered;
+}
+</style>
+<script>
+$(() => {
+$('#selectorBoxErrorSection').hide();
+$('#searchBox').on('input', () => {
+var searchBy = $('#selectorBox').val();
+var searchWhat = $('#searchBox').val().toLowerCase();
+if(searchBy == -1) {
+$('#selectorBoxErrorSection').show();
+$('#placementView > tbody > tr').show();
+return;
+} 
+$('#selectorBoxErrorSection').hide();
+if(searchWhat.length < 3) {
+$('#placementView > tbody > tr').show();
+return;
+}
+$('#placementView > tbody > tr').each(function() {
+var cellContent = $(this).find('td:eq('+searchBy+')').text().toLowerCase();
+if(cellContent.includes(searchWhat)) {
+$(this).show();
+}
+else {
+$(this).hide();
+}
+})
+})
+})
+</script>
+</head>
+<body>
+<h1> Example 10: Finding (find) </h1>
+<h2>Thinking Machines</h2>
+<h4>Placements 2022</h4>
+Search <input type='text' id='searchBox' placeholder='here...'>
+<select id='selectorBox'>
+<option value=-1> by </option>
+<option value=0>Name</option>
+<option value=1>Type</option>
+<option value=2>Company</option>
+<option value=3>Package</option>
+</select>
+<span id='selectorBoxErrorSection'>Please select</span>
+<br>
+<table id='placementView'>
+<thead>
+<br>
+<th>Name</th>
+<th>Type</th>
+<th>Company</th>
+<th>Package</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Harsh</td>
+<td>Full time</td>
+<td>Microsoft</td>
+<td><b>32 LPA</b></td>
+</tr>
+<tr>
+<td>Pawan</td>
+<td>Full time</td>
+<td>Revolt</td>
+<td><b>30 LPA</b></td>
+</tr>
+<tr>
+<td>Yash</td>
+<td>Full time</td>
+<td>TCS</td>
+<td><b>20 LPA</b></td>
+</tr>
+<tr>
+<td>Deepak</td>
+<td>Full time</td>
+<td>Accenture</td>
+<td><b>12 LPA</b></td>
+</tr>
+<tr>
+<td>Harshita</td>
+<td>Full time</td>
+<td>TCS</td>
+<td><b>4.6 LPA</b></td>
+</tr>
+<tr>
+<td>Lalit</td>
+<td>Full time</td>
+<td>Wipro</td>
+<td><b>10 LPA</b></td>
+</tr>
+<tr>
+<td>Praveen</td>
+<td>Internship</td>
+<td>GS Labs</td>
+<td><b>15000 per month</b></td>
+</tr>
+<tr>
+<td>Ritik</td>
+<td>Full Time </td>
+<td>GS Labs</td>
+<td><b>6 LPA</b></td>
+</tr>
+<tr>
+<td>Mohik</td>
+<td>Full Time</td>
+<td>Codenation</td>
+<td><b>33 LPA</b></td>
+</tr>
+<td>Shivika</td>
+<td>Full Time </td>
+<td>Triology Innovation</td>
+<td><b>6 LPA</b></td>
+</tr>
+</tbody>
+</table>
+<br><button onClick='doIt()'>Click Me</button>
+<br><a href='/'>Home</a>
+</body>
+</html>

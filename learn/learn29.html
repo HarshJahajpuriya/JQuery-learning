@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='/jquery/jquery-3.6.0.min.js'> </script>
+<script>
+$(() => {
+$('#t1').keypress((ev) => {
+if(ev.which>=97 && ev.which<=122) 
+{
+var ss = ev.target.selectionStart;
+var se = ev.target.selectionEnd;
+var leftString = ev.target.value.slice(0, ss);
+var rightString = ev.target.value.slice(se);
+var middleString = String.fromCharCode(ev.which-32);
+//alert(leftString)
+//alert(middleString)
+//alert(rightString)
+ev.target.value = leftString + middleString + rightString;
+ev.preventDefault();
+// Just after entering the chracter in between the string the cursor points at 
+// the last of the string. So,
+
+// Here we are placing the cursor just after the newly entered chracter
+ev.target.selectionStart = ss+1;
+ev.target.selectionEnd = ss+1;
+}
+});
+});
+</script>
+</head>
+<body>
+<h1>Example 22: Converting input value to Capital</h1>
+Enter Something: <input type='text' id='t1'> <br>
+<br>
+<a href='/'> Home </a>
+</body>
+</html>

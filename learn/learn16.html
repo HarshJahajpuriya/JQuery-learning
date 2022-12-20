@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning Jquery</title>
+<script src='jquery/jquery-3.6.0.min.js'> </script>
+<script>
+$(() => {
+$('#feature').click((ev) => {
+$('#something').toggle('visibility');
+// This will toggle the value of visibility property with a nice animation effect.
+});
+});
+</script>
+</head>
+<body>
+<h1>Example 16: Hiding div (using toggle)</h1>
+<div id='something'>
+<h2>Thinking machines</h2>
+<h3>Think Big!!!</h3>
+</div>
+Hide <input type='checkbox' id='feature'>
+<br>
+<br>
+<a href='/'>Home</a>
+</body>
+</html>

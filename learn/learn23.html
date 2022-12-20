@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<style>
+#cos td,th {
+border: 2px solid black;
+padding: 4px;
+}
+#cos {
+border-collapse: collapse;
+}
+.xyz {
+background-color: black;
+color: white;
+}
+</style>
+<script src='/jquery/jquery-3.6.0.min.js'> </script>
+<script>
+
+$(() => {
+
+// Event setting for select all checkbox.
+$('#selectAll').click(function(ev) {
+
+// deselecting all rows.
+$('#cos>tbody>tr').removeClass('xyz');
+$('#cos>tbody>tr').find('.cb').prop('checked', false);
+
+// If the selectAll checkbox is checked 
+if($(this).prop('checked')) {
+$('#cos>tbody>tr').trigger('click');
+// then we are programmatically clicking all the rows.
+}
+});
+
+
+// This function will return if all the rows are selected
+function allSelected() {
+var selected = $('#cos>tbody>tr').find('.cb:checked').length;
+var total = $('#cos>tbody>tr').length;
+return (selected === total) 
+}
+
+
+// Event setting for all row (but event handler hooked with tr)
+$('#cos>tbody>tr').click(function(ev) {
+
+$(ev.currentTarget).toggleClass('xyz');
+var cb = $(ev.currentTarget).find('.cb');
+
+if(!$(ev.target).is('.cb')) {
+// This will return true, if the clicked element, has cb in its classList.
+// else will return false.
+// Therefore, if the clicked element is checkbox, 
+// then we are not flipping the value of checked attribute.
+cb.prop('checked', !cb.prop('checked'));
+}
+
+if(allSelected()) {
+$('#selectAll').prop('checked', true);
+// If all the rows are selected then, we are setting true against checked property.
+} else {
+$('#selectAll').prop('checked', false);
+// Else we are setting false, against checked property of selectAll checkBox.
+}
+});
+
+});
+
+</script>
+</head>
+<body>
+<h1>Example 23: Select All Rows</h1>
+<table id='cos'>
+<thead>
+<tr>
+<th>S.No.</th>
+<th>Company</th>
+<th><input id='selectAll' type='checkbox'></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.</td>
+<td>Google</td>
+<td><input class='cb' type='checkbox'></td>
+</tr>
+<tr>
+<td>2.</td>
+<td>Microsoft</td>
+<td><input class='cb' type='checkbox'></td>
+</tr>
+<tr>
+<td>3.</td>
+<td>Walkover</td>
+<td><input class='cb' type='checkbox'></td>
+</tr>
+<tr>
+<td>4.</td>
+<td>CodeFlex</td>
+<td><input class='cb' type='checkbox'></td>
+</tr>
+<tr>
+<td>5.</td>
+<td>Thinking Machines</td>
+<td><input class='cb' type='checkbox'></td>
+</tr>
+</tbody>
+</table>
+<br>
+<a href='/'> Home </a>
+</body>
+</html>

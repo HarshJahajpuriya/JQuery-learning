@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.css">
+  <script src='jquery/jquery-3.6.0.min.js'></script>
+  <script src="jquery-ui-1.13.0/jquery-ui.js"></script>
+  <script>
+    function doSomething() {
+      alert($("#myScale").slider("value"))
+    }
+
+    function updateNotice() {
+      $("#notice").html("Value : " + $("#myScale").slider("value"))
+    }
+    
+    $(() => {
+      $("#myScale").slider({
+        min: 0,
+        max: 50,
+        value: 25,
+        // slide: updateNotice,
+        stop: updateNotice
+      })
+      $("#notice").html("Value : " + $("#myScale").slider("value"))
+    })
+  </script>
+</head>
+
+<body>
+  <h1>Example 65 - Slider</h1>
+  <br>
+  <div id="myScale">
+
+  </div>
+  <br>
+  <br>
+  <div id="notice"></div>
+  <br>
+  <button type="button" onclick="doSomething()">Click Me</button>
+  <br>
+  <br>
+  <a href='/'> Home </a>
+</body>
+
+</html>

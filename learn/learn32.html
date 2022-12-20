@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Learning JQuery</title>
+<script src='/jquery/jquery-3.6.0.min.js'> </script>
+<style>
+.xyz {
+height: 40px;
+overflow: hidden;
+}
+</style>
+<script>
+$(() => {
+
+var initialHeight = $('.xyz').css('height');
+
+$('#abcd').click((ev) => {
+
+ev.preventDefault();
+// alert($('.xyz').css('height'));
+
+// this will adjust height of the element
+if($('.xyz').css('height') == initialHeight) {
+$('.xyz').css('height', 'auto');	
+$(ev.target).html('Show less');
+} else {
+$('.xyz').css('height', initialHeight);
+$(ev.target).html('Show more');
+}
+
+});
+
+});
+</script>
+</head>
+<body>
+<h1>Example 32: changing height</h1>
+<div class='xyz'>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+I live in MHOW.<Br>
+It is also know as Dr. Ambedkar Nagar.<br>
+It is a millitary base<br>
+</div>
+<a id='abcd' href=''>Show more</a><br>
+<br>
+<a href='/'> Home </a>
+</body>
+</html>
