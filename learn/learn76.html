@@ -1,0 +1,303 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.css">
+  <script src='jquery/jquery-3.6.0.min.js'> </script>
+  <script src="jquery-ui-1.13.0/jquery-ui.js"></script>
+  <script>
+    $(() => {
+      loadDepartments();
+
+      $("#departmentsList").selectable({
+        selected: function(ev, ui) {
+          $(ui.selected).siblings().removeClass("ui-selected")
+          let departmentId = ui.selected.id;
+          $('#employeesTable>tbody>tr').remove();
+          loadEmployees(departmentId) 
+        }
+      })
+
+      $("#employeesTable>tbody").selectable({
+        filter: 'tr',
+        selected: function(ev, ui) {
+          $(ui.selected).siblings().removeClass("ui-selected");
+          loadEmployee(ui.selected.id)
+        }
+      })
+      
+    });
+
+    const getDepartments = () => {
+      var promise = new Promise((resolve, reject) => {
+        fetch("getDepartments").then(response => {
+          if(!response.ok) {
+            return Error("Cannot fetch departments, try after some time.")
+          }
+          return response.json();
+        }).then(departments => {
+          resolve(departments)
+        }).catch(err => {
+          reject(err.message)
+        })
+      })
+      return promise;
+    }
+
+    const getEmployees = (departmentId) => {
+      var promise = new Promise((resolve, reject) => {
+        fetch(`getEmployeesByDepartmentId?departmentId=${departmentId}`).then(response => {
+          if(!response.ok) {
+            throw Error("No Employees Found")
+            return;
+          }
+          return response.json();
+        }).then(employees => {
+          resolve(employees)
+        }).catch(err => {
+          reject(err.message)
+        })
+      });
+      return promise;
+    }
+
+    const getEmployee = (employeeId) => {
+      var promise = new Promise((resolve, reject) => {
+        fetch("getEmployeeById?employeeId="+employeeId).then(response => {
+          if(!response.ok) {
+            throw new Error("Cannot fetch details, try after some time.")
+          }
+          return response.json()
+        }).then(employee => {
+          resolve(employee)
+        }).catch(err => {
+          reject(err.message)
+        });
+      });
+      return promise;
+    }
+
+    const loadDepartments = () => {
+      getDepartments().then(departments => {
+        let departmentsList = $('#departmentsList')
+        for(let department of departments) {
+          console.log(department)
+          departmentsList.append($(`<li id=${department.id}>${department.name}</li>`));
+        }
+      }).catch(err => { 
+        $("#errorMessage").text(err);
+      })
+    }
+
+    const loadEmployees = (departmentId) => {
+      console.log('loading');
+      getEmployees(departmentId).then(employees => {
+        $("#errorMessage").text("")
+        let employeesTable = $('#employeesTable>tbody')
+        for(let employee of employees) {
+          let d = new Date(employee.joinDate);
+          let date = (d.getDate()<10?"0"+d.getDate():d.getDate());
+          let month = (((d.getMonth()+1)<10?"0"+(d.getMonth()+1):(d.getMonth()+1)));
+          let year = (d.getFullYear());
+          employeesTable.append($(`<tr id=${employee.id}>
+              <td class='table-employee-id'>${employee.id}</td><td>${employee.name}</td>
+              <td class='table-employee-phone'>${employee.phone}</td>
+              <td class='table-employee-join-date'>${date}-${month}-${year}</td>
+              <td class='table-employee-salary'>$ ${employee.salary}</td></tr>
+          `))
+        }
+      }).catch(err => {
+        $("#errorMessage").text(err);
+      })
+    }
+
+    const loadEmployee = (employeeId) => {
+      getEmployee(employeeId).then(employee => {
+        $('#employeeIdSpan').text(employee.id)
+        $('#employeeNameSpan').text(employee.name)
+        $('#employeeEmailSpan').text(employee.email)
+        $('#employeePhoneSpan').text(employee.phone)
+        let d = new Date(employee.joinDate);
+        let date = (d.getDate()<10?"0"+d.getDate():d.getDate());
+        let month = (((d.getMonth()+1)<10?"0"+(d.getMonth()+1):(d.getMonth()+1)));
+        let year = (d.getFullYear());
+        $('#employeeJoinDateSpan').text(`${date}-${month}-${year}`)
+        $('#employeeSalarySpan').text(employee.salary)
+        console.log(employee);
+      }).catch(err => {
+        $("#errorMessage").text(err);
+      })
+    }
+
+  </script>
+  <style>
+    .ui-selected {
+      color: white;
+      background-color: rgb(152, 151, 151);
+    }
+    body {  
+    }
+    .header {
+      text-align: center;
+      border-bottom: 1px solid orangered;
+    }
+    .container {
+      display: flex;
+    }
+    .left-pane {
+      width: 240px;
+      border-right: 1px solid orangered;
+    }
+    .right-pane {
+      flex-grow: 1;
+    }
+    .content {
+      height: calc(100vh - 150px);
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    .departments-list {
+      list-style: none;
+      padding-left: 12px;
+    }
+    .departments-list>li, .employees-table>tbody>tr{
+      padding: 6px 4px 2px 4px;
+      margin-right: 12px;
+      border-bottom: 1px solid gray;
+      cursor: pointer;
+    }
+    .departments-list :hover, .employees-table>tbody :hover {
+      color: white;
+      background-color: orange;
+      border-bottom: 1px solid white;
+    }
+    ::-webkit-scrollbar {
+      width: 8px;;
+    }
+    ::-webkit-scrollbar-track {
+      background: whitesmoke;
+      border-radius: 5px; ;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: orange;
+    }
+    .employees-list {
+      height: calc(100% - 150px);
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    .employees-table {
+      width: 99%;
+      border: 1px solid gray;
+      border-collapse: collapse;
+      margin-top: 18px;
+      margin-left: 6px;;
+    }
+    .employees-table th,td {
+      border: 1px solid gray;
+    }
+    .employees-table td {
+      padding: 4px 12px;
+    }
+    .table-employee-id, .table-employee-salary, .table-employee-join-date, .table-employee-phone {
+      text-align: center;
+    }
+    .error {
+      color: red;
+      font-size: large;
+      margin: 16px;
+      text-align: center;
+    }
+    .employee-details {
+      height: 150px;
+      width: calc(100% - 264px);
+      border: 1px solid gray;
+      position: absolute;
+      bottom: 0;
+      margin: 4px;
+      display: flex;
+    }
+    .employee-details > div {
+      flex: 1;
+      margin-top: 16px;
+      margin-left: 24px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <h1>HR Application (Example 76)</h1>
+  </div>
+  <div class="container">
+    <div class="left-pane">
+      <div class="header">
+        <h3>Departments</h3>
+      </div>
+      <div class="content">
+        <ul id="departmentsList" class="departments-list">
+        
+        </ul>
+      </div>
+    </div>
+    <div class="right-pane">
+      <div class="header">
+        <h3>Employees</h3>
+      </div>
+      <div class="content">
+        <div class="employees-list">
+          <table id="employeesTable" class="employees-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Join date</th>
+                <th>Salary</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+            </tbody>
+          </table>
+          <div class="error">
+            <span id="errorMessage"></span>
+          </div>
+        </div>
+        <div class="employee-details">
+          <div></div>
+          <div>
+            <b>Id</b><br>
+            <b>Name</b><br>
+            <b>Email</b><br>
+            <b>Phone</b><br>
+            <b>Joining Date</b><br>
+            <b>Salary</b><br>
+          </div>
+          <div>
+            <b>-</b><br>
+            <b>-</b><br>
+            <b>-</b><br>
+            <b>-</b><br>
+            <b>-</b><br>
+            <b>-</b><br>
+          </div>
+          <div>
+           <span id="employeeIdSpan"></span><br>
+           <span id="employeeNameSpan"></span><br>
+           <span id="employeeEmailSpan"></span><br>
+           <span id="employeePhoneSpan"></span><br>
+           <span id="employeeJoinDateSpan"></span><br>
+           <span id="employeeSalarySpan"></span><br>
+          </div>          
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

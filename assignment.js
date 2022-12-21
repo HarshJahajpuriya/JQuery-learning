@@ -30,10 +30,22 @@ class Employee {
   }
 }
 
+class Employee2 {
+  constructor(id, name, email, phone, joinDate, jobId, salary) {
+    this.id = id;
+    this.name = name;
+    this.email = email;
+    this.phone = phone;
+    this.joinDate = joinDate;
+    this.jobId = jobId;
+    this.salary = salary;
+  }
+}
+
 app.use(express.static('learn'));
 
 app.get('/getDepartments', async (request, response) => {
-  await timePass(3000);
+  //await timePass(3000);
   var connection = null;
   var departments = [];
   connection = await oracle.getConnection({
@@ -80,11 +92,81 @@ app.get('/getDepartmentEmployees', urlEncodedBodyParser, async (request, respons
     let lastName = row[2];
     employees.push(new Employee(id, firstName+" "+lastName));
   }
+  response.send(employees);
+})
+
+app.get('/getEmployeesByDepartmentId', urlEncodedBodyParser, async (request, response) => {
+  // await timePass(3000);
+  const departmentId = request.query.departmentId;
+  console.log(departmentId)
+  var employees=[];
+
+  var connection = await oracle.getConnection({
+    user: 'hr',
+    password: 'pass',
+    connectionString: 'localhost:1521/xepdb1'
+  })
+  // console.log(`select * from employees where department_id=${departmentId}`);
+  var resultSet = await connection.execute(`select * from employees where department_id=${departmentId}`);
+
+  if(resultSet.rows.length == 0) {
+    response.sendStatus(404);
+    connection.close();
+    return;
+  }
+  for(row of resultSet.rows) {
+    let id = row[0];
+    let firstName = row[1];
+    let lastName = row[2];
+    let email = row[3];
+    let phone = row[4];
+    let joinDate = row[5];
+    let jobId = row[6];
+    let salary = row[7];
+    employees.push(new Employee2(id, firstName+" "+lastName, email, phone, joinDate, jobId, salary));
+  }
+  
+  // console.log(employees.length);
 
   response.send(employees);
 
 })
 
+
+app.get('/getEmployeeById', urlEncodedBodyParser, async (request, response) => {
+  // await timePass(3000);
+  const employeeId = request.query.employeeId;
+  console.log(employeeId)
+  
+  var connection = await oracle.getConnection({
+    user: 'hr',
+    password: 'pass',
+    connectionString: 'localhost:1521/xepdb1'
+  })
+  // console.log(`select * from employees where department_id=${departmentId}`);
+  var resultSet = await connection.execute(`select * from employees where employee_id=${employeeId}`);
+
+  if(resultSet.rows.length == 0) {
+    response.sendStatus(404);
+    connection.close();
+    return;
+  }
+  let row = resultSet.rows[0];
+  let id = row[0];
+  let firstName = row[1];
+  let lastName = row[2];
+  let email = row[3];
+  let phone = row[4];
+  let joinDate = row[5];
+  let jobId = row[6];
+  let salary = row[7];
+  let employee  = new Employee2(id, firstName+" "+lastName, email, phone, joinDate, jobId, salary);
+
+  console.log(employee);
+
+  response.send(employee);
+
+})
 
 class City {
   constructor(id, name, sortOrder) {
