@@ -109,11 +109,6 @@ app.get('/getEmployeesByDepartmentId', urlEncodedBodyParser, async (request, res
   // console.log(`select * from employees where department_id=${departmentId}`);
   var resultSet = await connection.execute(`select * from employees where department_id=${departmentId}`);
 
-  if(resultSet.rows.length == 0) {
-    response.sendStatus(404);
-    connection.close();
-    return;
-  }
   for(row of resultSet.rows) {
     let id = row[0];
     let firstName = row[1];
