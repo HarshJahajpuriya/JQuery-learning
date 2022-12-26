@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.css">
+  <script src='jquery/jquery-3.6.0.min.js'> </script>
+  <script src="jquery-ui-1.13.0/jquery-ui.js"></script>
+  <script>
+    $(() => {
+      getAllEmployees().then(employees => {
+        dataModel.employees = employees;
+        dataModel.pageSize = 10;
+        dataModel.pageNumber = 1;
+      }).catch(err => {
+        alert(err)
+      })
+    });
+    const dataModel = {
+      employees: [],
+      pageSize: 0,
+      pageNumber: 0
+    }
+    const getAllEmployees = () => {
+      var promise = new Promise((resolve, reject) => {
+        fetch("getAllEmployees").then(response => {
+          if(!response.ok) {
+            throw Error('Cannot fetch employees, try after some time.')
+          }
+          return response.json();
+        }).then(employees => {
+          resolve(employees)
+        }).catch(err => {
+          reject(err.message)
+        })
+      })
+      return promise;
+    }
+    const loadEmployees = () => {
+      getAllEmployees().then(employees => {
+        let tbody = $('#employeesTable').find('tbody')
+        for(let emp  of employees) {
+          tbody.append($(`<tr id=${emp.id}><td>${emp.id}</td><td>${emp.firstName}</td><td>${emp.lastName}</td></tr>`))
+        }
+      }).catch()
+    }
+  </script>
+  <style>
+    table {
+      width: 99%;
+      border: 1px solid gray;
+      border-collapse: collapse;
+      margin-top: 18px;
+      margin-left: 6px
+    }
+
+    th,
+    td {
+      border: 1px solid gray;
+    }
+
+    td {
+      padding: 4px 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <table id="employeesTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+  </table>
+  <br>
+  <a href='/'> Home </a>
+</body>
+
+</html>

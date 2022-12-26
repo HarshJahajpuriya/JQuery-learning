@@ -10,7 +10,7 @@ const app = express();
 const urlEncodedBodyParser = bodyParser.urlencoded({extended: false});
 
 const timePass = (ms) => {
-  var promise = new Promise((resolve) => {
+  let promise = new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
   return promise;
@@ -30,7 +30,7 @@ class Employee {
   }
 }
 
-class Employee2 {
+class EmployeeDetail {
   constructor(id, name, email, phone, joinDate, jobId, salary) {
     this.id = id;
     this.name = name;
@@ -46,15 +46,15 @@ app.use(express.static('learn'));
 
 app.get('/getDepartments', async (request, response) => {
   //await timePass(3000);
-  var connection = null;
-  var departments = [];
+  let connection = null;
+  let departments = [];
   connection = await oracle.getConnection({
     connectionString: "localhost:1521/xepdb1",
     user: 'hr',
     password: 'pass'
   })
 
-  var resultSet = await connection.execute(`select department_id, department_name from departments`)
+  let resultSet = await connection.execute(`select department_id, department_name from departments`)
 
   for(row of resultSet.rows) {
     let id = row[0];
@@ -70,15 +70,15 @@ app.get('/getDepartmentEmployees', urlEncodedBodyParser, async (request, respons
   await timePass(3000);
   const departmentId = request.query.departmentId;
   console.log(departmentId)
-  var employees=[];
+  let employees=[];
 
-  var connection = await oracle.getConnection({
+  let connection = await oracle.getConnection({
     user: 'hr',
     password: 'pass',
     connectionString: 'localhost:1521/xepdb1'
   })
 
-  var resultSet = await connection.execute(`select employee_id, first_name, last_name from employees where department_id=${departmentId}`);
+  let resultSet = await connection.execute(`select employee_id, first_name, last_name from employees where department_id=${departmentId}`);
 
   if(resultSet.rows.length == 0) {
     response.sendStatus(404);
@@ -99,15 +99,14 @@ app.get('/getEmployeesByDepartmentId', urlEncodedBodyParser, async (request, res
   // await timePass(3000);
   const departmentId = request.query.departmentId;
   console.log(departmentId)
-  var employees=[];
+  let employees=[];
 
-  var connection = await oracle.getConnection({
+  let connection = await oracle.getConnection({
     user: 'hr',
     password: 'pass',
     connectionString: 'localhost:1521/xepdb1'
   })
-  // console.log(`select * from employees where department_id=${departmentId}`);
-  var resultSet = await connection.execute(`select * from employees where department_id=${departmentId}`);
+  let resultSet = await connection.execute(`select * from employees where department_id=${departmentId}`);
 
   for(row of resultSet.rows) {
     let id = row[0];
@@ -118,11 +117,9 @@ app.get('/getEmployeesByDepartmentId', urlEncodedBodyParser, async (request, res
     let joinDate = row[5];
     let jobId = row[6];
     let salary = row[7];
-    employees.push(new Employee2(id, firstName+" "+lastName, email, phone, joinDate, jobId, salary));
+    employees.push(new EmployeeDetail(id, firstName+" "+lastName, email, phone, joinDate, jobId, salary));
   }
   
-  // console.log(employees.length);
-
   response.send(employees);
 
 })
@@ -133,13 +130,12 @@ app.get('/getEmployeeById', urlEncodedBodyParser, async (request, response) => {
   const employeeId = request.query.employeeId;
   console.log(employeeId)
   
-  var connection = await oracle.getConnection({
+  let connection = await oracle.getConnection({
     user: 'hr',
     password: 'pass',
     connectionString: 'localhost:1521/xepdb1'
   })
-  // console.log(`select * from employees where department_id=${departmentId}`);
-  var resultSet = await connection.execute(`select * from employees where employee_id=${employeeId}`);
+  let resultSet = await connection.execute(`select * from employees where employee_id=${employeeId}`);
 
   if(resultSet.rows.length == 0) {
     response.sendStatus(404);
@@ -155,7 +151,7 @@ app.get('/getEmployeeById', urlEncodedBodyParser, async (request, response) => {
   let joinDate = row[5];
   let jobId = row[6];
   let salary = row[7];
-  let employee  = new Employee2(id, firstName+" "+lastName, email, phone, joinDate, jobId, salary);
+  let employee  = new EmployeeDetail(id, firstName+" "+lastName, email, phone, joinDate, jobId, salary);
 
   console.log(employee);
 
@@ -175,13 +171,13 @@ let cities = [];
 
 app.get("/getCities", async (request, response) => {
   cities = [];
-  var connection = await oracle.getConnection({
+  let connection = await oracle.getConnection({
     user: "hr",
     password: "pass",
     connectionString: "localhost:1521/xepdb1"
   })
 
-  var resultSet = await connection.execute("select * from cities order by sort_order")
+  let resultSet = await connection.execute("select * from cities order by sort_order")
   console.log(resultSet)
   if(resultSet.rows.length == 0) {
     response.send("No Data Available")
@@ -202,7 +198,7 @@ app.get("/getCities", async (request, response) => {
 
 app.get("/updateCityOrder", urlEncodedBodyParser, async(request, response) => {
 
-  var connection = await oracle.getConnection({
+  let connection = await oracle.getConnection({
     user: "hr",
     password: "pass",
     connectionString: "localhost:1521/xepdb1"
@@ -247,7 +243,7 @@ app.get("/getAllSubjects", async (request, response) => {
 
   let subjects = [];
   
-  var resultSet = await connection.execute("select * from subjects")
+  let resultSet = await connection.execute("select * from subjects")
   for(let row of resultSet.rows) {
     subjects.push(row[0]);
   }
@@ -282,7 +278,7 @@ app.get("/addSubject", urlEncodedBodyParser, async(request, response) => {
     connection.close();
     return;
   }
-  var resultSet = await connection.execute(`insert into ${table} values ('${subject}')`)
+  let resultSet = await connection.execute(`insert into ${table} values ('${subject}')`)
   console.log(resultSet)
   if(table === "subjects") {
     console.log('deleting')
@@ -310,7 +306,7 @@ app.get("/getTeams", async (request, response) => {
     connectionString: "localhost:1521/xepdb1"
   })
 
-  var resultSet = await connection.execute('select * from teams order by id')
+  let resultSet = await connection.execute('select * from teams order by id')
   let teams = [];
   for(let row of resultSet.rows) {
     let id = row[0]
@@ -335,7 +331,7 @@ app.get("/getPlayers", async (request, response) => {
     connectionString: "localhost:1521/xepdb1"
   })
 
-  var resultSet = await connection.execute('select * from players order by id')
+  let resultSet = await connection.execute('select * from players order by id')
   let players = [];
   for(let row of resultSet.rows) {
     let id = row[0]
@@ -364,6 +360,35 @@ app.get("/updatePlayer", urlEncodedBodyParser, async(request, response) => {
   response.send("Done")
 })
 
+app.get("/getAllEmployees", async(request, response) => {
+  console.log("Fetching All Employees");
+  let connection = await oracle.getConnection({
+    user: 'hr',
+    password: 'pass',
+    connectionString: 'localhost:1521/xepdb1'
+  })
+
+  let resultSet = await connection.execute(`select employee_id, first_name, last_name from employees`)
+
+  class Employee {
+    constructor(id, firstName, lastName) {
+      this.id = id;
+      this.firstName = firstName;
+      this.lastName = lastName;
+    }
+  }
+
+  let employees = [];
+  for(let row of resultSet.rows) {
+    let id = row[0];
+    let firstName = row[1];
+    let lastName = row[2];
+    employees.push(new Employee(id, firstName, lastName));
+  }  
+
+  response.send(employees);
+
+})
 
 app.listen(port, function(err) {
   if(err) {
