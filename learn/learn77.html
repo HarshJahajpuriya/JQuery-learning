@@ -5,6 +5,7 @@
   <meta charset='utf-8'>
   <title>Learning JQuery</title>
   <link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.css">
+  <link rel="stylesheet" href="fontawesome-6.2.1-web/css/all.css"/>
   <script src='jquery/jquery-3.6.0.min.js'> </script>
   <script src="jquery-ui-1.13.0/jquery-ui.js"></script>
   <script>
@@ -13,6 +14,7 @@
         dataModel.employees = employees;
         dataModel.pageSize = 10;
         dataModel.pageNumber = 1;
+        loadEmployees();
       }).catch(err => {
         alert(err)
       })
@@ -20,12 +22,14 @@
     const dataModel = {
       employees: [],
       pageSize: 0,
-      pageNumber: 0
+      pageNumber: 0,
+      startIndex: -1,
+      endIndex: -1
     }
     const getAllEmployees = () => {
       var promise = new Promise((resolve, reject) => {
         fetch("getAllEmployees").then(response => {
-          if(!response.ok) {
+          if (!response.ok) {
             throw Error('Cannot fetch employees, try after some time.')
           }
           return response.json();
@@ -38,47 +42,107 @@
       return promise;
     }
     const loadEmployees = () => {
-      getAllEmployees().then(employees => {
-        let tbody = $('#employeesTable').find('tbody')
-        for(let emp  of employees) {
-          tbody.append($(`<tr id=${emp.id}><td>${emp.id}</td><td>${emp.firstName}</td><td>${emp.lastName}</td></tr>`))
-        }
-      }).catch()
+      if(dataModel.pageNumber === 1) {
+        $('.prevPagebutton').hide();
+      } else if(dataModel.pageNumber === Math.ceil(dataModel.employees.length/dataModel.pageSize)) {
+        $('.nextPagebutton').hide();
+      } else {
+        $('.prevPagebutton').show();
+        $('.nextPagebutton').show();        
+      }
+      $('#pageNumber').text(`${dataModel.pageNumber}/${Math.ceil(dataModel.employees.length/dataModel.pageSize)}`)
+      dataModel.endIndex = dataModel.pageSize * dataModel.pageNumber
+      dataModel.startIndex = dataModel.endIndex - dataModel.pageSize
+      let tbody = $('#employeesTable').find('tbody');
+      tbody.text("")
+      let i = dataModel.startIndex;
+      let emp;
+      while (i < dataModel.endIndex && i<dataModel.employees.length-1) {
+        emp = dataModel.employees[i];
+        tbody.append($(`<tr id=${emp.id}><td>${i+1}</td><td>${emp.id}</td><td>${emp.firstName}</td><td>${emp.lastName}</td></tr>`))
+        i++;
+      }
+    }
+    const goToNextPage = () => {
+      if((dataModel.pageNumber+1) <= Math.ceil(dataModel.employees.length/dataModel.pageSize)) {
+        dataModel.pageNumber++;
+        loadEmployees();
+      }
+    }
+    const goToPrevPage = () => {
+      if((dataModel.pageNumber-1) > 0) {
+        dataModel.pageNumber--;
+        loadEmployees();
+      }
     }
   </script>
   <style>
+    .content {
+      text-align: center;
+    }
+    #pageNumber {
+      margin: auto;
+      width: 50%;
+      text-align: right;
+      padding-bottom: 8px;
+      color: gray;
+    }
     table {
-      width: 99%;
+      width: 50%;
       border: 1px solid gray;
       border-collapse: collapse;
-      margin-top: 18px;
-      margin-left: 6px
+      margin: auto;
     }
-
-    th,
-    td {
+    th, td {
       border: 1px solid gray;
     }
-
     td {
       padding: 4px 12px;
+    }
+    .paginationButtonsDiv {
+      width: 50%;
+      display: flex;
+      margin: auto;
+      padding-top: 20px;
+    }
+    .paginationButtonsDiv > span {
+      flex: 1;
+      cursor: pointer;
+      border: 1px solid gray;
+      padding: 1px 2px;
+      background-color: whitesmoke;
+    }
+    .space {
+      flex: 10
     }
   </style>
 </head>
 
 <body>
-  <table id="employeesTable">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-      </tr>
-    </thead>
-    <tbody>
+  <div class="content">
+    <h1>Example 77 - Pagination(1)</h1>
+    <hr>
+    <h2>Employees</h2>
+    <div id="pageNumber">3/11</div>
+    <table id="employeesTable">
+      <thead>
+        <tr>
+          <th>S.No.</th>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+        </tr>
+      </thead>
+      <tbody>
 
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+    <div class="paginationButtonsDiv">
+      <span class="prevPagebutton" onclick="goToPrevPage()"><i class="fas fa-arrow-left"></i></span>
+      <div class="space"></div>
+      <span class="nextPagebutton" onclick="goToNextPage()"><i class="fas fa-arrow-right"></i></span>
+    </div>
+  </div>
   <br>
   <a href='/'> Home </a>
 </body>
