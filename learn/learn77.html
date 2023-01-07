@@ -9,23 +9,25 @@
   <script src='jquery/jquery-3.6.0.min.js'> </script>
   <script src="jquery-ui-1.13.0/jquery-ui.js"></script>
   <script>
-    $(() => {
-      getAllEmployees().then(employees => {
-        dataModel.employees = employees;
-        dataModel.pageSize = 10;
-        dataModel.pageNumber = 1;
-        loadEmployees();
-      }).catch(err => {
-        alert(err)
-      })
-    });
     const dataModel = {
       employees: [],
       pageSize: 0,
       pageNumber: 0,
-      startIndex: -1,
-      endIndex: -1
+      numberOfPages: 0
     }
+
+    $(() => {
+      getAllEmployees().then(employees => {
+        dataModel.employees = employees;
+        dataModel.pageSize = 8;
+        dataModel.pageNumber = 1;
+        dataModel.numberOfPages = Math.ceil(dataModel.employees.length/dataModel.pageSize);
+        updateView();
+      }).catch(err => {
+        alert(err)
+      })
+    });
+
     const getAllEmployees = () => {
       var promise = new Promise((resolve, reject) => {
         fetch("getAllEmployees").then(response => {
@@ -41,38 +43,38 @@
       })
       return promise;
     }
-    const loadEmployees = () => {
+    const updateView = () => {
       if(dataModel.pageNumber === 1) {
         $('.prevPagebutton').hide();
-      } else if(dataModel.pageNumber === Math.ceil(dataModel.employees.length/dataModel.pageSize)) {
+      } else if(dataModel.pageNumber === dataModel.numberOfPages) {
         $('.nextPagebutton').hide();
       } else {
         $('.prevPagebutton').show();
         $('.nextPagebutton').show();        
       }
-      $('#pageNumber').text(`${dataModel.pageNumber}/${Math.ceil(dataModel.employees.length/dataModel.pageSize)}`)
-      dataModel.endIndex = dataModel.pageSize * dataModel.pageNumber
-      dataModel.startIndex = dataModel.endIndex - dataModel.pageSize
+      $('#pageStatus').text(`${dataModel.pageNumber}/${dataModel.numberOfPages}`)
+      let endIndex = dataModel.pageSize * dataModel.pageNumber
+      let startIndex = endIndex - dataModel.pageSize
       let tbody = $('#employeesTable').find('tbody');
       tbody.text("")
-      let i = dataModel.startIndex;
+      let i = startIndex;
       let emp;
-      while (i < dataModel.endIndex && i<dataModel.employees.length-1) {
+      while (i < endIndex && i<dataModel.employees.length-1) {
         emp = dataModel.employees[i];
         tbody.append($(`<tr id=${emp.id}><td>${i+1}</td><td>${emp.id}</td><td>${emp.firstName}</td><td>${emp.lastName}</td></tr>`))
         i++;
       }
     }
     const goToNextPage = () => {
-      if((dataModel.pageNumber+1) <= Math.ceil(dataModel.employees.length/dataModel.pageSize)) {
+      if((dataModel.pageNumber+1) <= dataModel.numberOfPages) {
         dataModel.pageNumber++;
-        loadEmployees();
+        updateView();
       }
     }
     const goToPrevPage = () => {
       if((dataModel.pageNumber-1) > 0) {
         dataModel.pageNumber--;
-        loadEmployees();
+        updateView();
       }
     }
   </script>
@@ -80,7 +82,7 @@
     .content {
       text-align: center;
     }
-    #pageNumber {
+    #pageStatus {
       margin: auto;
       width: 50%;
       text-align: right;
@@ -99,13 +101,13 @@
     td {
       padding: 4px 12px;
     }
-    .paginationButtonsDiv {
+    .paginationControls {
       width: 50%;
       display: flex;
       margin: auto;
       padding-top: 20px;
     }
-    .paginationButtonsDiv > span {
+    .paginationControls > span {
       flex: 1;
       cursor: pointer;
       border: 1px solid gray;
@@ -123,7 +125,7 @@
     <h1>Example 77 - Pagination(1)</h1>
     <hr>
     <h2>Employees</h2>
-    <div id="pageNumber">3/11</div>
+    <div id="pageStatus"></div>
     <table id="employeesTable">
       <thead>
         <tr>
@@ -137,7 +139,7 @@
 
       </tbody>
     </table>
-    <div class="paginationButtonsDiv">
+    <div class="paginationControls">
       <span class="prevPagebutton" onclick="goToPrevPage()"><i class="fas fa-arrow-left"></i></span>
       <div class="space"></div>
       <span class="nextPagebutton" onclick="goToNextPage()"><i class="fas fa-arrow-right"></i></span>

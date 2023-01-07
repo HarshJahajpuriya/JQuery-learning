@@ -1,0 +1,196 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.css">
+  <link rel="stylesheet" href="fontawesome-6.2.1-web/css/all.css" />
+  <script src='jquery/jquery-3.6.0.min.js'> </script>
+  <script src="jquery-ui-1.13.0/jquery-ui.js"></script>
+  <script>
+    const dataModel = {
+      employees: [],
+      pageSize: 0,
+      pageNumber: 0,
+      totalPages: 0,
+      numberOfPageNumberTabs: 0
+    }
+
+    $(() => {
+      getAllEmployees().then(employees => {
+        dataModel.employees = employees;
+        dataModel.pageSize = 10;
+        dataModel.pageNumber = 1;
+        dataModel.totalPages = Math.ceil(dataModel.employees.length / dataModel.pageSize);
+        dataModel.numberOfPageNumberTabs = 5;
+        updateView();
+      }).catch(err => {
+        alert(err)
+      })
+    });
+
+    const getAllEmployees = () => {
+      var promise = new Promise((resolve, reject) => {
+        fetch("getAllEmployees").then(response => {
+          if (!response.ok) {
+            throw Error('Cannot fetch employees, try after some time.')
+          }
+          return response.json();
+        }).then(employees => {
+          resolve(employees)
+        }).catch(err => {
+          reject(err.message)
+        })
+      })
+      return promise;
+    }
+    const updateView = () => {
+
+      // Update displayed page number
+      $('#pageStatus').text(`${dataModel.pageNumber}/${dataModel.totalPages}`)
+
+      // Populating employees table
+      let endIndex = dataModel.pageSize * dataModel.pageNumber
+      let startIndex = endIndex - dataModel.pageSize
+      let tbody = $('#employeesTable').find('tbody');
+      tbody.text("")
+      let i = startIndex;
+      let emp;
+      while (i < endIndex && i < dataModel.employees.length - 1) {
+        emp = dataModel.employees[i];
+        tbody.append($(`<tr id=${emp.id}><td>${i + 1}</td><td>${emp.id}</td><td>${emp.firstName}</td><td>${emp.lastName}</td></tr>`))
+        i++;
+      }
+
+      // Creating pagination controls
+      let tabStartPageNumber;
+      if(dataModel.pageNumber % dataModel.numberOfPageNumberTabs === 0) {
+        tabStartPageNumber = dataModel.pageNumber - (dataModel.numberOfPageNumberTabs - 1)
+      } else {
+        tabStartPageNumber =  dataModel.pageNumber - (dataModel.pageNumber % dataModel. numberOfPageNumberTabs) +1;
+      }
+      let tabEndPageNumber = tabStartPageNumber + dataModel.numberOfPageNumberTabs;
+      if(tabEndPageNumber > dataModel.totalPages) {
+        $("#nextPageButtons").hide()
+        tabEndPageNumber = dataModel.totalPages+1;
+      } else {
+        $("#nextPageButtons").show()
+      }
+      $('#navigationButtons').html('');
+      dataModel.pageNumber = +dataModel.pageNumber;
+      for(let i=tabStartPageNumber; i<tabEndPageNumber; i++) {
+        if(i === +dataModel.pageNumber) {
+          $('#navigationButtons').append(`<span><button disabled id=${i}>${i}</button></span>`)
+        } else {
+          $('#navigationButtons').append(`<span><button onClick='changePage(this.id)' id=${i}>${i}</button></span>`)
+        }
+      }
+      if(dataModel.pageNumber <= dataModel.numberOfPageNumberTabs) {
+        $("#prevPageButtons").hide()
+      } else {
+        $("#prevPageButtons").show()
+      }
+    }
+
+    const changePage = (number) => {
+      dataModel.pageNumber = number;
+      updateView();
+    }
+
+    function showNextPageButtons() {
+      if(dataModel.pageNumber%dataModel.numberOfPageNumberTabs == 0) {
+        dataModel.pageNumber = dataModel.pageNumber+1;
+      } else {
+        dataModel.pageNumber = dataModel.pageNumber + (dataModel.numberOfPageNumberTabs + 1 - (dataModel.pageNumber%dataModel.numberOfPageNumberTabs))
+      }
+      updateView();
+    }
+    
+    const showPrevPageButtons = () => {
+      if(dataModel.pageNumber%dataModel.numberOfPageNumberTabs === 0) {
+        dataModel.pageNumber -= dataModel.numberOfPageNumberTabs;
+      } else {
+        dataModel.pageNumber = +dataModel.pageNumber - dataModel.pageNumber%dataModel.numberOfPageNumberTabs
+      }
+      updateView();
+    }
+  </script>
+  <style>
+    .content {
+      text-align: center;
+    }
+
+    #pageStatus {
+      margin: auto;
+      width: 50%;
+      text-align: right;
+      padding-bottom: 8px;
+      color: gray;
+    }
+
+    table {
+      width: 50%;
+      border: 1px solid gray;
+      border-collapse: collapse;
+      margin: auto;
+    }
+
+    th,
+    td {
+      border: 1px solid gray;
+    }
+
+    td {
+      padding: 4px 12px;
+    }
+
+    .paginationControls { 
+      width: 50%;
+      display: flex;
+      margin: auto;
+      padding-top: 20px;
+    }
+
+    .paginationControls > span {
+      margin: 6px;
+    }
+
+    .space {
+      flex: 1
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content">
+    <h1>Example 77 - Pagination(1)</h1>
+    <hr>
+    <h2>Employees</h2>
+    <div id="pageStatus"></div>
+    <table id="employeesTable">
+      <thead>
+        <tr>
+          <th>S.No.</th>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+    <div class="paginationControls">
+      <span class="space"></span>
+      <span id="prevPageButtons"><button onclick="showPrevPageButtons()">&lt;&lt;</button></span>
+      <span id="navigationButtons"></span>
+      <span id="nextPageButtons"><button onclick="showNextPageButtons()">&gt;&gt;</button></span>
+      <span class="space"></span>
+    </div>
+  </div>
+  <br>
+  <a href='/'> Home </a>
+</body>
+
+</html>
