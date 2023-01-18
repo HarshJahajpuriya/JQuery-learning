@@ -390,6 +390,37 @@ app.get("/getAllEmployees", async(request, response) => {
 
 })
 
+app.get("/addEmployee", urlEncodedBodyParser, (request, response) => {
+  const id = request.query.id;
+  const name = request.query.name;
+  const designation = request.query.designation;
+  const salary = request.query.salary;
+  const gender = request.query.gender;
+  console.log("Id : " + id)
+  console.log("Name : " + name)
+  console.log("Designation : " + designation)
+  console.log("Salary : " + salary)
+  console.log("Gender : " + gender)
+
+  response.send(`
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+    </head>
+    <body>
+      Done <br/>
+      <a href="/">Home</a> 
+    </body>
+    </html>
+  `)
+})
+
+
 app.listen(port, function(err) {
   if(err) {
     console.log(err)

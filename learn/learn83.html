@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.css">
+  <script src="jquery/jquery-3.6.0.min.js"></script>
+  <script src="jquery-ui-1.13.0/jquery-ui.js"></script>
+  <script src="jquery-validation-1.19.5/jquery.validate.js"></script>
+  <script>
+    $(() => {
+      $('#employeeAddForm').validate({
+        rules: {
+          "name": {
+            required: true,
+            minlength: 2,
+            maxlength: 15
+          }
+        }
+      });
+    })
+  </script>
+</head>
+
+<body>
+  <h1>Example 83 - Form validation (Using JQuery Validation Plugin - passing rules)</h1>
+  <br>
+
+  <form id="employeeAddForm" action="addEmployee">
+    <label for="name">Name : </label>
+    <input type="text" name="name" id="name">
+    <br>
+    <br>
+    <button type="submit">Add Employee</button>
+  </form>
+
+  <br>
+  <a href='/'> Home </a>
+</body>
+
+</html>
