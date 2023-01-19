@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <script src='jquery/jquery-3.6.0.min.js'> </script>
+  <script src="jquery-ui-1.13.0/jquery-ui.min.js"></script>
+  <script src="jquery-validation-1.19.5/jquery.validate.min.js"></script>
+  <script>
+    $(() => {
+      $('#employeeAddForm').validate({
+        rules: {
+          name: {
+            required: true,
+            rangelength: [3,15]
+          },
+          age: {
+            required: true,
+            range: [18, 60]
+          },
+          email: {
+            required: true,
+            email: true
+          },
+          url: {
+            required: true,
+            url: true
+          },
+          salary: {
+            required: true,
+            number: true
+          },
+          aadharCardNumber: {
+            required: true,
+            digits: true
+          },
+          retypedAadharCardNumber: {
+            required: true,
+            digits: true,
+            equalTo: aadharCardNumber
+          }, 
+          dateOfJoining: {
+            required: true,
+            dateISO: true
+          }
+        }
+      })
+    });
+  </script>
+</head>
+
+<body>
+  <h1>Example 87 - Form validation</h1>
+  <br>
+
+  <br>
+  <br>
+  <form id="employeeAddForm" action="addEmployee">
+    <label for="name">Name : </label>
+    <input type="text" name="name" id="name">
+    <br>
+    <label for="age">Age : </label>
+    <input type="text" name="age" id="age">
+    <br>
+    <label for="email">Email : </label>
+    <input type="text" name="email" id="email">
+    <br>
+    <label for="url">URL : </label>
+    <input type="text" name="url" id="url">
+    <br>
+    <label for="salary">Salary : </label>
+    <input type="text" name="salary" id="salary">
+    <br>
+    <label for="aadharCardNumber">Aadhar Card number : </label>
+    <input type="text" name="aadharCardNumber" id="aadharCardNumber">
+    <br>
+    <label for="retypedAadharCardNumber">Retype Aadhar Card number : </label>
+    <input type="text" name="retypedAadharCardNumber" id="retypedAadharCardNumber">
+    <br>
+    <label for="dateOfJoining">Date Of Joining : </label>
+    <input type="text" name="dateOfJoining" id="dateOfJoining">
+    <br>
+    <br>
+    <button type="submit">Process</button>
+  </form>
+  <br>
+  <a href='/'> Home </a>
+</body>
+
+</html>
