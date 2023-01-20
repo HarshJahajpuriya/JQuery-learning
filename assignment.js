@@ -421,6 +421,17 @@ app.get("/addEmployee", urlEncodedBodyParser, (request, response) => {
 })
 
 
+app.get("/checkUsernameValidForRegistration", function(request, response) {
+  var username = request.query.name;
+  console.log(username)
+  var usersInDB = ["Harsh","Yash","Pawan","Lucky","Adarsh"];
+  if(usersInDB.find(el => el == username)) {
+    response.send(false);
+    return;
+  }
+  response.send(true);
+})
+
 app.listen(port, function(err) {
   if(err) {
     console.log(err)

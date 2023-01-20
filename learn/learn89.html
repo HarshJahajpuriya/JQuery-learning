@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.css">
+  <script src='jquery/jquery-3.6.0.min.js'> </script>
+  <script src="jquery-ui-1.13.0/jquery-ui.js"></script>
+  <script src="jquery-validation-1.19.5/jquery.validate.js"></script>
+  <script>
+
+    jQuery.validator.addMethod("empId",(value, element)=>{
+      // VALID PATTERN
+      // 0-2 -> A-D
+      // 3-6 -> 0-9
+      // 7-9 -> A-Z
+
+      value = value.trim();
+      if(value.length != 10) return false;
+
+      var c, e = 0;
+      while(e<=2) {
+        c = value.charCodeAt(e);
+        if(c<65 || c>68) return false;
+        e++;
+      }
+      while(e<=6) {
+        c = value.charCodeAt(e);
+        if(c<48 || c>57) return false;
+        e++;
+      }
+      while(e<=9) {
+        c = value.charCodeAt(e);
+        if(c<65 || c>90) return false;
+        e++;
+      }
+      return true;
+
+    },"Employee Id is invalid")
+
+    function processForm() {
+      var validate = $("#employeeIdForm").validate({
+        rules: {
+          employeeId: {
+            required: true,
+            empId: true
+          }
+        }
+      })
+
+      $("#errorPanel").html("");
+      validate.form();
+      if(validate.valid() == false) $("#errorPanel").html("INVALID");
+    }
+  </script>  
+  <style>
+    #errorPanel {
+      color: red;
+      font-size: 20pt;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Example 89 - JQuery validation (Adding custom rules)</h1>
+  <br>
+  <div id="errorPanel"></div>
+  <br>
+  <form id="employeeIdForm">
+    <label for="employeeId">Enter Employee ID: </label>
+    <input type="text" name="employeeId" id="employeeId">
+    <br>
+    <br>
+    <button type="button" onclick="processForm()">Process</button>
+  </form>
+
+  <br>
+  <br>
+  <a href='/'> Home </a>
+</body>
+
+</html>

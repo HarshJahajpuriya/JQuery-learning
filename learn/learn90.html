@@ -1,0 +1,64 @@
+<!-- /checkUsernameValidForRegistration?username=Yash -->
+
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.css">
+  <script src='jquery/jquery-3.6.0.min.js'> </script>
+  <script src="jquery-ui-1.13.0/jquery-ui.js"></script>
+  <script src="jquery-validation-1.19.5/jquery.validate.js"></script>
+  <script>
+    function processForm() {
+      var validate = $("#nameForm").validate({
+        rules: {
+          name: {
+            required: true,
+            remote: 'checkUsernameValidForRegistration'
+            // The response of this url is either true or false, and depending upon the repsonse
+            // the validity of the field will be determined.
+          }
+        },
+        messages: {
+          name: {
+            required: "Unique username required",
+            remote: "Name already taken"
+          }
+        }
+      })
+
+      $("#errorPanel").html("");
+      validate.form();
+      if(validate.valid() == false) $("#errorPanel").html("INVALID");
+    }
+  </script>  
+  <style>
+    #errorPanel {
+      color: red;
+      font-size: 20pt;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Example 90 - JQuery validation remote rule (verify from server)</h1>
+  <br>
+  <div id="errorPanel"></div>
+  <br>
+  <form id="nameForm">
+    <label for="name">Enter Employee Name: </label>
+    <input type="text" name="name" id="name">
+    <br>
+    <br>
+    <button type="button" onclick="processForm()">Process</button>
+  </form>
+
+  <br>
+  <br>
+  <a href='/'> Home </a>
+</body>
+
+</html>
