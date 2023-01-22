@@ -1,13 +1,12 @@
 const express = require('express');
 const oracle = require('oracledb')
 const bodyParser = require('body-parser');
-const res = require('express/lib/response');
-const e = require('express');
 
 const port = 3000;
 const app = express();
-
 const urlEncodedBodyParser = bodyParser.urlencoded({extended: false});
+app.use(urlEncodedBodyParser);
+app.use(bodyParser.json())
 
 const timePass = (ms) => {
   let promise = new Promise((resolve) => {
@@ -418,6 +417,13 @@ app.get("/addEmployee", urlEncodedBodyParser, (request, response) => {
     </body>
     </html>
   `)
+})
+
+app.post("/saveItem", (request, response) => {
+  console.log(request.body)
+  console.log("============================")
+  console.log(`Name: ${request.body.name}, Price: ${request.body.price}`)
+  response.send({success: true});
 })
 
 
