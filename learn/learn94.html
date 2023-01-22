@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <script>
+    function register() {
+      var registrationForm = document.getElementById("registrationForm");
+      var registrationFormData = new FormData(registrationForm);
+      var dataToSend = Object.fromEntries(registrationFormData.entries())
+      console.log(dataToSend)
+    }
+  </script>
+</head>
+
+<body>
+  <h1>Example 94 - FormData class & Object.fromEntries() (all fields)</h1>
+  <br>
+  <form id="registrationForm">
+    <label for="name">Name : </label>
+    <input type="text" name="name" id="name">
+    <br>
+    <label for="age">Age : </label>
+    <input type="number" name="age" id="age">
+    <br>
+    <label for="password">Password : </label>
+    <input type="password" name="password" id="password">
+    <br>
+    <label for="gender">Gender : </label>
+    Male &nbsp;
+    <input type="radio" name="gender" value="m" id="male">
+    Female &nbsp;
+    <input type="radio" name="gender" value="f" id="female">
+    <br>
+    <label for="isIndian">Is Indian : </label>
+    <input type="checkbox" name="isIndian" id="isIndian">
+    <br>
+    <label for="education">Education : </label>
+    <select>
+      <option value="graduate">Graduate</option>
+      <option value="postGraduate">Post Graduate</option>
+    </select>
+    <br>
+    <label for="dob">Date Of Birth : </label>
+    <input type="date" name="dob" id="dob">
+    <br>
+    <label for="email">Email : </label>
+    <input type="email" name="email" id="email">
+    <br>
+    <br>
+    <button type="button" onclick="register()">Register</button>
+  </form>
+  <br>
+  <a href='/'> Home </a>
+</body>
+
+</html>
