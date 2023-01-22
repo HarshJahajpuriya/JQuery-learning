@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Learning JQuery</title>
+  <script>
+    function saveItem() {
+      // --------------------------------------------
+      var form = document.getElementById("itemForm");
+      var formData = new FormData(form);
+      var dataToSend = Object.fromEntries(formData.entries());
+      // --------------------------------------------
+
+      console.log(dataToSend)
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = () => {
+        if(xhr.readyState === 4) {
+          if(xhr.status === 200) {
+            console.log(xhr.responseText);
+          } else {
+            alert(xhr.statusText);
+          }
+        }
+      }
+      xhr.open("POST", "saveItem", true);
+      xhr.setRequestHeader("Content-type", "application/json");
+      xhr.send(JSON.stringify(dataToSend));
+    }
+  </script>
+</head>
+
+<body>
+  <h1>Example 93 - FormData class & Object.fromEntries()</h1>
+  <br>
+  <form id="itemForm">
+    <label for="name">Item Name: </label>
+    <input type="text" name="name" id="name">
+    <br>
+    <label for="price">Price: </label>
+    <input type="number" name="price" id="price">
+    <br>
+    <button type="button" onclick="saveItem()">Save Item</button>
+  </form>
+  <br>
+  <a href='/'> Home </a>
+</body>
+
+</html>
