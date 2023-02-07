@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "express": "^4.17.1",
+    "express-fileupload": "^1.4.0",
     "oracledb": "^5.3.0"
   }
 }
